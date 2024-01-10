@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .email-body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+        padding: 20px;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #0c134f;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      .button:hover {
+        background-color: #176b87;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="email-body">
+        <h1>Email Verification</h1>
+        <p>Hello,</p>
+        <p>
+          Thank you for registering with us. To complete your registration,
+          please verify your email by clicking on the button below:
+        </p>
+        <a href="{{verification_link}}" class="button">Verify Email</a>
+        <p>
+          If you did not request this verification, please ignore this email.
+        </p>
+        <p>Best regards,</p>
+        <p>Ecommerce Team</p>
+      </div>
+    </div>
+  </body>
+</html>
