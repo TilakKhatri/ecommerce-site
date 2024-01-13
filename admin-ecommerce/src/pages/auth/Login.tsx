@@ -1,30 +1,68 @@
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import useLoginMutation from "@/services/auth/use-login-mutation";
+import { log } from "console";
+interface IFormInput {
+  email: string;
+  password: string;
+  isRememberMe?: boolean;
+}
+
+//Validate an input value
+const schema = yup
+  .object({
+    email: yup
+      .string()
+      .email("Email must be valid.")
+      .required("Email is required."),
+    password: yup.string().required("Password is required."),
+    isRememberMe: yup.boolean(),
+  })
+  .required();
+
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const { mutate: login, isPending } = useLoginMutation();
+
+  const handleLogin: SubmitHandler<IFormInput> = (data) => {
+    login(data);
+    reset();
+  };
+
   return (
     <section className="min-h-screen flex justify-center items-center">
       <div className="min-w-[480px] p-12 rounded-[32px] shadow-2xl bg-white">
         <div className="text-center">
-          <h2 className="title-screen text-neutral-600">Sign in to IMS</h2>
-          <p className="mt-3 body-large text-neutral-400">
-            Enter the details below and login
-          </p>
+          <h2 className="title-screen text-neutral-600">IMS system</h2>
         </div>
 
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleSubmit(handleLogin)}>
           <fieldset>
             <label htmlFor="email" className="label">
               Email
             </label>
             <input
+              {...register("email")}
               type="email"
               className="input"
               id="email"
               placeholder="Enter your email"
             />
-            {/* {errors.email && (
+            {errors.email && (
               <p className="mt-2 text-sm text-red-500">
                 {errors.email.message}
               </p>
-            )} */}
+            )}
           </fieldset>
 
           <fieldset className="mt-4">
@@ -32,27 +70,32 @@ function Login() {
               Password
             </label>
             <input
+              {...register("password")}
               type="password"
               className="input"
               id="password"
               placeholder="Enter your password"
             />
-            {/* {errors.password && (
+            {errors.password && (
               <p className="mt-2 text-sm text-red-500">
                 {errors.password.message}
               </p>
-            )} */}
+            )}
           </fieldset>
 
           <div className="mt-4">
             <div className="flex gap-2">
-              <input type="checkbox" className="cursor-pointer" />
+              <input
+                {...register("isRememberMe")}
+                type="checkbox"
+                className="cursor-pointer"
+              />
               <label>Remember me</label>
             </div>
           </div>
 
           <button
-            // disabled={isPending}
+            disabled={isPending}
             type="submit"
             className="primary-btn body-medium mt-8"
           >

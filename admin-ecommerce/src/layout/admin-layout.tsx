@@ -8,13 +8,12 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
 
   //   const loginStatus = useSelector<RootState>((state) => state.user.loginStatus);
-  const loginStatus = true;
+  const loginStatus = false;
   if (!loginStatus) {
-    console.log(loginStatus);
     return <Navigate to="/admin/login" />;
   }
 
-  if (loginStatus && pathname === "/") {
+  if (loginStatus && pathname === "/admin") {
     return <Navigate to="/admin/dashboard" />;
   }
 

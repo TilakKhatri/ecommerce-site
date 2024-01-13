@@ -1,3 +1,4 @@
+import { getToken } from "@/utils/user-utils";
 import axios from "axios";
 
 // import { getToken, resetLoginData } from "@/utils/utils";
@@ -9,17 +10,17 @@ const http = axios.create({
   timeout: 20000,
 });
 
-// http.interceptors.request.use(
-//   (config) => {
-//     if (getToken()) {
-//       config.headers["Authorization"] = `Bearer ${getToken()}`;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+http.interceptors.request.use(
+  (config) => {
+    if (getToken()) {
+      config.headers["Authorization"] = `Bearer ${getToken()}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 http.interceptors.response.use(
   function (response) {
@@ -29,7 +30,7 @@ http.interceptors.response.use(
   function (error) {
     if (error.response.status === 401) {
       //   resetLoginData();
-      window.location.href = "/login";
+      window.location.href = "/admin/login";
     }
 
     return Promise.reject(error);

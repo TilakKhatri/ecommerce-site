@@ -17,8 +17,7 @@ interface IRoutes {
   };
 }
 const getUserType = () => {
-  const userType = "ADMIN";
-
+  const userType = "CUSTOMER";
   return userType;
 };
 const getLayoutWrapper = () => {
@@ -42,7 +41,6 @@ const MergedLayoutRoute = ({
     : Fragment;
 
   const LayoutWrapper = getLayoutWrapper();
-  console.log(LayoutWrapper);
   return (
     <PrivateRouteWrapper>
       <LayoutWrapper>{children}</LayoutWrapper>
@@ -62,7 +60,7 @@ function Router() {
             path={route.path}
             element={
               <MergedLayoutRoute route={route}>
-                {<route.component />}
+                <route.component />
               </MergedLayoutRoute>
             }
           />

@@ -1,4 +1,8 @@
-import { Squares2X2Icon, UsersIcon } from "@heroicons/react/24/outline";
+import {
+  Squares2X2Icon,
+  UsersIcon,
+  BuildingStorefrontIcon,
+} from "@heroicons/react/24/outline";
 
 interface INavigation {
   id: string;
@@ -25,5 +29,11 @@ export const navigationLinks: INavigation[] = [
     name: "User",
     path: "/admin/user",
     icon: UsersIcon,
+  },
+  {
+    id: "product",
+    name: "Product",
+    path: "/admin/product",
+    icon: BuildingStorefrontIcon,
   },
 ];

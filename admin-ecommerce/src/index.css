@@ -1,3 +1,135 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "figtree", "san-serif";
+    scroll-behavior: smooth;
+  }
+  tr {
+    @apply px-5 text-[14px] font-medium tracking-[0.02em] text-neutral-700;
+  }
+
+  td {
+    @apply px-5 py-4;
+  }
+
+  th {
+    @apply text-neutral-600 px-5 py-4 font-semibold;
+  }
+
+  thead {
+    @apply border-y border-neutral-200;
+  }
+}
+
+.bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.drawer-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.bar::-webkit-scrollbar-track {
+  background: #e5e5e5;
+  border-radius: 50px;
+}
+
+.bar::-webkit-scrollbar-thumb {
+  background: #808080;
+  border-radius: 50px;
+}
+
+@layer components {
+  .input {
+    @apply block w-full px-2 py-3 rounded-md border text-sm font-normal  outline-none border-neutral-200 focus:border-core-primary;
+  }
+
+  .label {
+    @apply block mb-1 text-sm font-semibold text-neutral-900;
+  }
+
+  .primary-btn {
+    @apply px-3 py-3 w-full rounded-full text-shade-light text-base title-body bg-core-primary;
+  }
+
+  .secondary-btn {
+    @apply primary-btn bg-neutral-50 text-neutral-800;
+  }
+
+  .title-screen {
+    @apply font-semibold text-3xl;
+  }
+
+  .title-section {
+    @apply font-bold text-[26px];
+  }
+
+  .title-sub-section {
+    @apply font-bold text-[22px];
+  }
+  .sub-section-body {
+    @apply font-normal text-[16px];
+  }
+  .title-body {
+    @apply font-semibold text-lg;
+  }
+
+  .title-group {
+    @apply font-medium text-sm;
+  }
+
+  .body-large-semibold {
+    @apply font-semibold;
+  }
+
+  .body-default {
+    @apply text-sm;
+  }
+
+  .body-default-semibold {
+    @apply text-sm font-semibold;
+  }
+
+  .body-small {
+    @apply text-xs;
+  }
+
+  .body-small-semibold {
+    @apply font-semibold text-xs;
+  }
+
+  .link-large {
+    @apply font-semibold underline;
+  }
+
+  .link-default {
+    @apply text-sm font-semibold underline;
+  }
+
+  .link-small {
+    @apply text-sm font-semibold;
+  }
+
+  .accepted-badge {
+    @apply body-default-semibold w-fit rounded-2xl px-2 py-1 text-supporting-success bg-supporting-success-light;
+  }
+
+  .pending-badge {
+    @apply body-default-semibold px-3 py-1 text-supporting-warning bg-supporting-warning-light;
+  }
+
+  .secondary-badge {
+    @apply body-default-semibold w-fit rounded-2xl px-2 py-1 text-neutral-800 bg-neutral-50;
+  }
+
+  .required {
+    @apply font-normal text-sm;
+  }
+
+  .error-msg {
+    @apply mt-1 text-supporting-error text-sm;
+  }
+}

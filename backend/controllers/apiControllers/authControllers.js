@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken");
 const { hashPassword } = require("../../helpers/auth");
 const User = require("../../models/userModel");
 
-const transporter = require("../../services/nodemailers");
-
 dotenv.config();
 
 const login = async (req, res) => {
@@ -15,11 +13,11 @@ const login = async (req, res) => {
     if (!email) {
       return res
         .status(400)
-        .json({ error: "You must enter an email address." });
+        .json({ message: "You must enter an email address." });
     }
 
     if (!password) {
-      return res.status(400).json({ error: "You must enter a password." });
+      return res.status(400).json({ message: "You must enter a password." });
     }
 
     const user = await User.findOne({ email });
@@ -27,7 +25,7 @@ const login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .send({ error: "No user found for this email address." });
+        .send({ message: "No user found for this email address." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -35,12 +33,12 @@ const login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        error: "Password Incorrect",
+        message: "Password Incorrect",
       });
     }
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "30d",
     });
     if (!token) {
       throw new Error();
@@ -59,7 +57,7 @@ const login = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       // error: "Your request could not be processed. Please try again.",
-      errorMessage: error,
+      message: error,
     });
   }
 };
@@ -70,19 +68,21 @@ const register = async (req, res) => {
     if (!email) {
       return res
         .status(400)
-        .json({ error: "You must enter an email address." });
+        .json({ message: "You must enter an email address." });
     }
 
     if (!fullname) {
-      return res.status(400).json({ error: "You must enter your full name." });
+      return res
+        .status(400)
+        .json({ message: "You must enter your full name." });
     }
 
     if (!password) {
-      return res.status(400).json({ error: "You must enter a password." });
+      return res.status(400).json({ message: "You must enter a password." });
     }
     const userExits = await User.findOne({ email });
     if (userExits) {
-      return res.json({ error: "Email is already taken" });
+      return res.json({ message: "Email is already taken" });
     }
     const user = await User.create({
       fullName: fullname,
@@ -95,7 +95,7 @@ const register = async (req, res) => {
       { _id: user._id },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "30d",
       }
     );
 
@@ -122,7 +122,7 @@ const register = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      error: "Your request could not be processed. Please try again.",
+      message: "Your request could not be processed. Please try again.",
     });
   }
 };

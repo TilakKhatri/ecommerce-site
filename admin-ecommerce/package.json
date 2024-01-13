@@ -11,20 +11,24 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
+    "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.0.1",
-    "@tanstack/react-query": "^5.15.5",
+    "@tanstack/react-query": "^5.17.9",
     "@tanstack/react-query-devtools": "^5.15.5",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.3",
     "react-hot-toast": "^2.4.1",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
-    "vite-tsconfig-paths": "^4.2.3"
+    "vite-tsconfig-paths": "^4.2.3",
+    "yup": "^1.3.3"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.14.6",
+    "@tanstack/eslint-plugin-query": "^5.17.7",
+    "@types/node": "^20.11.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

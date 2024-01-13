@@ -1,7 +1,7 @@
 function Home() {
   return (
-    <section className="h-[100vh] bg-gray-50 flex justify-center items-center">
-      <div className="bg-neutral-50 py-24 px-6 text-center">
+    <section className="h-[100vh] flex justify-center items-center">
+      <div className=" py-24 px-6 text-center">
         <h1 className="mt-2 mb-16 text-xl sm:text-2xl md:text-3xl xl:text-5xl font-bold tracking-tight">
           The best offer on the market <br />
           <span className="text-purple-600">for your Ecommerce business</span>
