@@ -5,8 +5,14 @@ export default {
     extend: {
       colors: {
         core: {
-          primary: "#9333EA",
-          "primary-light": "#1890FF14",
+          primary: "#000000",
+          secondary: "#7C8DB5",
+          white: "#FFFFFF",
+          border: "#E6EDFF",
+          indigo: "#347AE2",
+          red: "#FF3B30",
+          green: "#34C759",
+          orange: "#FF9500",
         },
         neutral: {
           50: "#F4F4F4",

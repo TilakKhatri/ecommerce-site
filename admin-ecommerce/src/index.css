@@ -52,41 +52,29 @@
   }
 
   .primary-btn {
-    @apply px-3 py-3 w-full rounded-full text-shade-light text-base title-body bg-core-primary;
+    @apply px-3 py-3 w-full rounded-full text-shade-light text-base  bg-core-primary;
   }
 
   .secondary-btn {
     @apply primary-btn bg-neutral-50 text-neutral-800;
   }
-
-  .title-screen {
-    @apply font-semibold text-3xl;
+  .large-title {
+    @apply font-medium text-3xl;
   }
-
-  .title-section {
-    @apply font-bold text-[26px];
+  .title {
+    @apply font-medium text-xl;
   }
-
-  .title-sub-section {
-    @apply font-bold text-[22px];
+  .headline {
+    @apply font-medium text-[16px];
   }
-  .sub-section-body {
+  .body {
     @apply font-normal text-[16px];
   }
-  .title-body {
-    @apply font-semibold text-lg;
+  .foot-note {
+    @apply font-normal text-sm;
   }
-
-  .title-group {
-    @apply font-medium text-sm;
-  }
-
-  .body-large-semibold {
-    @apply font-semibold;
-  }
-
-  .body-default {
-    @apply text-sm;
+  .caption {
+    @apply font-medium text-xs;
   }
 
   .body-default-semibold {

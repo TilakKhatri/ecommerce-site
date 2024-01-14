@@ -6,9 +6,10 @@ import Login from "@/pages/auth/Login";
 interface IAdminRoutes {
   id: string;
   path: string;
+  exact: boolean;
   component: React.FC;
   meta?: {
-    adminLayout?: boolean;
+    appLayout?: boolean;
     privateRoute?: boolean;
   };
 }
@@ -17,18 +18,20 @@ const AdminRoutes: IAdminRoutes[] = [
   {
     id: "login",
     path: "/admin/login",
+    exact: true,
     component: Login,
     meta: {
-      adminLayout: false,
+      appLayout: true,
       privateRoute: false,
     },
   },
   {
     id: "dashboard",
     path: "/admin/dashboard",
+    exact: true,
     component: Dashboard,
     meta: {
-      adminLayout: true,
+      appLayout: true,
       privateRoute: true,
     },
   },
@@ -36,9 +39,10 @@ const AdminRoutes: IAdminRoutes[] = [
   {
     id: "product",
     path: "/admin/product",
+    exact: true,
     component: Product,
     meta: {
-      adminLayout: true,
+      appLayout: true,
       privateRoute: true,
     },
   },
@@ -46,9 +50,10 @@ const AdminRoutes: IAdminRoutes[] = [
   {
     id: "user",
     path: "/admin/user",
+    exact: true,
     component: User,
     meta: {
-      adminLayout: true,
+      appLayout: true,
       privateRoute: true,
     },
   },

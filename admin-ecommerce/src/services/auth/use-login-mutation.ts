@@ -14,7 +14,7 @@ interface ILoginProps {
 
 const loginApi = async (data: ILoginProps) => {
   const url = AuthConfig.LOGIN();
-  const response = await http.post(`/admin/login`, data);
+  const response = await http.post(url, data);
   return { ...response.data, isRememberMe: data.isRememberMe };
 };
 
@@ -25,11 +25,12 @@ const useLoginMutation = () => {
   return useMutation({
     mutationFn: loginApi,
     onSuccess: (data) => {
+      console.log("data", data);
       toast.success(data?.message || "Login successful");
       dispatch(
         setLogin({
-          token: data?.data.bearerToken,
-          userData: data?.data.admin,
+          token: data?.token,
+          userData: data?.user,
           isRememberMe: data.isRememberMe,
         })
       );
@@ -47,7 +48,7 @@ const useLoginMutation = () => {
     },
     onError: (e: any) => {
       console.log("error", e);
-      toast.error(e?.response?.data?.message || "Something went wrong");
+      toast.error(e?.response?.data?.error || "Something went wrong");
     },
   });
 };

@@ -1,74 +1,83 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Fragment, Suspense } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AdminRoutes from "./routes/admin-routes";
-import AdminLayout from "../layout/admin-layout";
-import PrivateRoute from "./private-route";
-import { Fragment } from "react";
+import Login from "@/pages/auth/Login";
 import Home from "@/pages/home";
-import PageNotFound from "@/pages/404";
+import PrivateLayout from "./private-route";
+import AppLayout from "@/layout/appLayout";
 
 interface IRoutes {
-  id?: string;
-  path?: string;
-  component?: React.FC;
+  id: string;
+  path: string;
+  exact: boolean;
+  component: React.FC;
   meta?: {
-    adminLayout?: boolean;
+    appLayout?: boolean;
     privateRoute?: boolean;
   };
 }
-const getUserType = () => {
-  const userType = "CUSTOMER";
-  return userType;
-};
-const getLayoutWrapper = () => {
-  switch (getUserType()) {
-    case "ADMIN":
-      return AdminLayout;
-    default:
-      return Fragment;
-  }
-};
 
-const MergedLayoutRoute = ({
-  route,
+const MergeLayoutRoute = ({
   children,
+  route,
 }: {
-  route?: IRoutes;
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  route: IRoutes;
 }) => {
-  const PrivateRouteWrapper = route?.meta?.privateRoute
-    ? PrivateRoute
+  const AppLayoutWrapper = route.meta?.appLayout ? AppLayout : Fragment;
+  const PrivateRouteWrapper = route.meta?.privateRoute
+    ? PrivateLayout
     : Fragment;
 
-  const LayoutWrapper = getLayoutWrapper();
-  return (
-    <PrivateRouteWrapper>
-      <LayoutWrapper>{children}</LayoutWrapper>
-    </PrivateRouteWrapper>
+  return route.meta?.privateRoute ? (
+    <AppLayoutWrapper>{children}</AppLayoutWrapper>
+  ) : (
+    <PrivateRouteWrapper>{children}</PrivateRouteWrapper>
   );
 };
 
-function Router() {
+const Router = () => {
+  const { loginStatus, user } = useSelector((state: any) => state.user);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
-        {AdminRoutes.map((route) => (
-          <Route
-            key={route.id}
-            path={route.path}
-            element={
-              <MergedLayoutRoute route={route}>
-                <route.component />
-              </MergedLayoutRoute>
-            }
-          />
-        ))}
-        <Route path="*" element={<PageNotFound />} />
       </Routes>
+      {/* change false to loginStatus after setting up login logic*/}
+      {!loginStatus && !user.isAdmin ? (
+        <Routes>
+          <Route path="*" element={<Login />} />
+        </Routes>
+      ) : (
+        <Routes>
+          {AdminRoutes.map((route) => {
+            return (
+              <Route
+                key={route.id}
+                path={route.path}
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="flex w-full h-[100vh] items-center justify-center">
+                        Loading...
+                      </div>
+                    }
+                  >
+                    <MergeLayoutRoute route={route}>
+                      <route.component />
+                    </MergeLayoutRoute>
+                  </Suspense>
+                }
+              />
+            );
+          })}
+        </Routes>
+      )}
     </BrowserRouter>
   );
-}
+};
 
 export default Router;

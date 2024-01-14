@@ -28,3 +28,24 @@ export function setUserLogin(props: ISetUserLoginProps) {
   sessionStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
   sessionStorage.setItem(TOKEN_KEY, token);
 }
+
+export function getUserData() {
+  const localStorageData = localStorage.getItem(USER_DATA_KEY);
+  const sessionStorageData = sessionStorage.getItem(USER_DATA_KEY);
+
+  try {
+    if (localStorageData) return JSON.parse(localStorageData);
+    if (sessionStorageData) return JSON.parse(sessionStorageData);
+  } catch {
+    return null;
+  }
+}
+
+export function isUserLogin() {
+  const localStorageToken = localStorage.getItem(TOKEN_KEY);
+  const sessionStorageToken = sessionStorage.getItem(TOKEN_KEY);
+  const userData = getUserData();
+
+  if ((localStorageToken || sessionStorageToken) && userData) return true;
+  return false;
+}

@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import useLoginMutation from "@/services/auth/use-login-mutation";
-import { log } from "console";
 interface IFormInput {
   email: string;
   password: string;
@@ -43,7 +42,7 @@ function Login() {
     <section className="min-h-screen flex justify-center items-center">
       <div className="min-w-[480px] p-12 rounded-[32px] shadow-2xl bg-white">
         <div className="text-center">
-          <h2 className="title-screen text-neutral-600">IMS system</h2>
+          <h2 className="large-title text-core-indigo">IMS system</h2>
         </div>
 
         <form className="mt-6" onSubmit={handleSubmit(handleLogin)}>
@@ -97,7 +96,7 @@ function Login() {
           <button
             disabled={isPending}
             type="submit"
-            className="primary-btn body-medium mt-8"
+            className="primary-btn bg-core-indigo mt-8"
           >
             Login
           </button>

@@ -3,45 +3,47 @@ import {
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 // import toast from "react-hot-toast";
-
-import cn from "classnames";
-import { navigationLinks } from "@/navigation/admin-navigation";
 import { Link, useLocation } from "react-router-dom";
+import cn from "classnames";
+
+import logo from "@/assets/Icon.svg";
+
+import {
+  customerCareLink,
+  navigationLinks,
+} from "@/navigation/admin-navigation";
 
 function Sidebar({ className }: { className?: string }) {
   const { pathname } = useLocation();
   return (
     <aside className={cn(className, " flex flex-col justify-between h-screen")}>
-      <div>
-        {/* <Link to="/">
-            <img src={logo} alt="logo" className="mt-10 mb-12" />
-            Home
-          </Link> */}
+      <div className="p-5">
+        <Link to="/">
+          <img src={logo} alt="logo" className="mt-10 mb-12" />
+        </Link>
 
-        <div className="p-5">
-          <p className="mt-8 font-semibold">WeSale</p>
-
+        <div>
           {navigationLinks.map((item) => (
             <Link
               to={item.path}
               key={item.id}
               className={cn(
-                "mt-3 p-2 body-default-semibold flex gap-2 group text-neutral-400 transition-all hover:bg-core-primary-light",
+                "mt-3 p-2 body-default-semibold flex gap-2 group text-core-secondary transition-all hover:bg-core-primary-light",
                 {
-                  "bg-core-primary-light": item.path === pathname,
+                  "bg-transparent": item.path === pathname,
                 }
               )}
             >
               <item.icon
-                className={cn("shrink-0 group-hover:text-core-primary", {
-                  "text-core-primary": item.path === pathname,
+                className={cn("shrink-0 group-hover:text-core-indigo", {
+                  "text-core-indigo": item.path === pathname,
                 })}
                 height={20}
                 width={20}
               />
               <p
-                className={cn("group-hover:text-core-primary", {
-                  "text-core-primary": item.path === pathname,
+                className={cn("group-hover:text-core-indigo", {
+                  "text-core-indigo": item.path === pathname,
                 })}
               >
                 {item.name}
@@ -79,28 +81,47 @@ function Sidebar({ className }: { className?: string }) {
           </div>
         </div>
       </div>
-
-      <button
-        //   onClick={handleLogout}
-        className="group text-neutral-600 flex items-center mx-1 justify-between gap-2 px-5 py-2 transition-all mb-10 rounded-lg hover:bg-core-primary-light"
-        type="button"
-      >
-        <div>
-          <p className="text-left group-hover:text-core-primary">
-            {/* {user?.name} */}username
-          </p>
-          <p className="text-xs group-hover:text-core-primary">
-            {/* {user?.email} */}
-            user email
-          </p>
-        </div>
-
-        <ArrowRightOnRectangleIcon
-          height={20}
-          width={20}
-          className="group-hover:text-core-primary"
-        />
-      </button>
+      <div className="p-5">
+        {customerCareLink?.map((item) => (
+          <Link
+            to={item.path}
+            key={item.id}
+            className={cn(
+              "mt-3 p-2 body-default-semibold flex gap-2 group text-core-secondary transition-all hover:bg-core-primary-light",
+              {
+                "bg-transparent": item.path === pathname,
+              }
+            )}
+          >
+            <item.icon
+              className={cn("shrink-0 group-hover:text-core-indigo", {
+                "text-core-indigo": item.path === pathname,
+              })}
+              height={20}
+              width={20}
+            />
+            <p
+              className={cn("group-hover:text-core-indigo", {
+                "text-core-indigo": item.path === pathname,
+              })}
+            >
+              {item.name}
+            </p>
+          </Link>
+        ))}
+        <button
+          //   onClick={handleLogout}
+          className="group text-core-red flex items-center mt-3 p-2 justify-between  transition-all mb-10 rounded-lg hover:bg-core-primary-light"
+          type="button"
+        >
+          <ArrowRightOnRectangleIcon
+            height={24}
+            width={24}
+            className="group-hover:text-core-secondary"
+          />
+          <p className={cn("group-hover:text-core-secondary")}>Log out</p>
+        </button>
+      </div>
     </aside>
   );
 }

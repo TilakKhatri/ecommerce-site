@@ -1,10 +1,10 @@
 import { IUserState } from "@/types/user";
-import { setUserLogin } from "@/utils/user-utils";
+import { getUserData, isUserLogin, setUserLogin } from "@/utils/user-utils";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: IUserState = {
-  user: null,
-  loginStatus: false,
+  user: getUserData() || {},
+  loginStatus: isUserLogin() || false,
 };
 
 export const userSlice = createSlice({
