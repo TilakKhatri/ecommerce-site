@@ -11,11 +11,12 @@ function AppLayout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div> */}
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="flex">
         <Sidebar className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light" />
-        <div className="w-full px-8 py-12 ml-[4.5rem] overflow-x-hidden">
-          {children}
+        <div className="flex flex-col w-full">
+          <NavBar />
+          <div className="w-full py-4 px-4 overflow-x-hidden">{children}</div>
         </div>
       </div>
     </>

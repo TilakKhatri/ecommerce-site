@@ -49,3 +49,11 @@ export function isUserLogin() {
   if ((localStorageToken || sessionStorageToken) && userData) return true;
   return false;
 }
+
+export function resetLogin() {
+  const userData = getUserData();
+  if (userData) {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+}
