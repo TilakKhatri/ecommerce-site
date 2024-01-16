@@ -1,9 +1,13 @@
+import { useState } from "react";
 import {
+  ArrowDownLeftIcon,
   // PlusIcon,
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 // import toast from "react-hot-toast";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import cn from "classnames";
 
 import logo from "@/assets/Icon.svg";
@@ -12,23 +16,53 @@ import {
   customerCareLink,
   navigationLinks,
 } from "@/navigation/admin-navigation";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+
+import { resetLogin } from "@/redux/slices/user-slice";
 
 function Sidebar({ className }: { className?: string }) {
-  const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useSelector((state: any) => state.user);
+  const isToggle = () => setIsOpen(!isOpen);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  const handleLogout = () => {
+    dispatch(resetLogin());
+    navigate("/");
+  };
+  // className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light"
   return (
     <>
       <aside
-        className={cn(className, " flex flex-col justify-between h-screen")}
+        className={cn(
+          { "basis-[2%]": isOpen, "basis-[25%]": !isOpen },
+          className,
+          " flex flex-col justify-between h-screen bg-white transition-all shadow-md"
+        )}
       >
         <div className="px-5">
-          <Link to="/">
-            <img src={logo} alt="logo" className="mt-4 mb-12" />
-          </Link>
+          <div className="mt-4 flex justify-between items-center">
+            <div className={cn({ hidden: isOpen })}>
+              <Link to="/">
+                <img src={logo} alt="logo" className="" />
+              </Link>
+            </div>
+            <div className="cursor-pointer text-core-secondary ">
+              <ArrowLeftCircleIcon
+                className={cn(
+                  {
+                    "rotate-180 ml-2 transition delay-10  text-core-indigo":
+                      isOpen,
+                  },
+                  "hover:text-core-indigo"
+                )}
+                onClick={isToggle}
+                width={24}
+                height={24}
+              />
+            </div>
+          </div>
 
           <div>
             {navigationLinks.map((item) => (
@@ -50,9 +84,15 @@ function Sidebar({ className }: { className?: string }) {
                   width={20}
                 />
                 <p
-                  className={cn("group-hover:text-core-indigo", {
-                    "text-core-indigo": item.path === pathname,
-                  })}
+                  className={cn(
+                    "group-hover:text-core-indigo",
+                    {
+                      "text-core-indigo": item.path === pathname,
+                    },
+                    {
+                      hidden: isOpen,
+                    }
+                  )}
                 >
                   {item.name}
                 </p>
@@ -109,16 +149,22 @@ function Sidebar({ className }: { className?: string }) {
                 width={20}
               />
               <p
-                className={cn("group-hover:text-core-indigo", {
-                  "text-core-indigo": item.path === pathname,
-                })}
+                className={cn(
+                  "group-hover:text-core-indigo",
+                  {
+                    "text-core-indigo": item.path === pathname,
+                  },
+                  {
+                    hidden: isOpen,
+                  }
+                )}
               >
                 {item.name}
               </p>
             </Link>
           ))}
           <button
-            //   onClick={handleLogout}
+            onClick={handleLogout}
             className="group text-core-red flex items-center mt-3 p-2 justify-between  transition-all mb-10 rounded-lg hover:bg-core-primary-light"
             type="button"
           >
@@ -127,7 +173,13 @@ function Sidebar({ className }: { className?: string }) {
               width={24}
               className="group-hover:text-core-secondary"
             />
-            <p className={cn("group-hover:text-core-secondary")}>Log out</p>
+            <p
+              className={cn("group-hover:text-core-secondary", {
+                hidden: isOpen,
+              })}
+            >
+              Log out
+            </p>
           </button>
         </div>
       </aside>

@@ -1,5 +1,10 @@
 import { IUserState } from "@/types/user";
-import { getUserData, isUserLogin, setUserLogin } from "@/utils/user-utils";
+import {
+  getUserData,
+  isUserLogin,
+  setUserLogin,
+  resetUserLogin,
+} from "@/utils/user-utils";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: IUserState = {
@@ -23,7 +28,7 @@ export const userSlice = createSlice({
     },
 
     resetLogin: (state) => {
-      // resetLoginData();
+      resetUserLogin();
       state.user = null;
       state.loginStatus = false;
     },

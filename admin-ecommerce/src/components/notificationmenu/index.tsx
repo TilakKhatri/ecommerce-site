@@ -1,7 +1,7 @@
-import { Menu, Transition } from "@headlessui/react";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
-import { BellIcon } from "@heroicons/react/24/solid";
 import { Fragment } from "react";
+
+import { Menu, Transition } from "@headlessui/react";
+import { BellIcon } from "@heroicons/react/24/solid";
 
 export default function NotificationMenu() {
   return (
@@ -24,14 +24,7 @@ export default function NotificationMenu() {
           <Menu.Items className="ring-1 ring-black ring-opacity-5 focus:outline-none absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg">
             <div className=" px-1 py-1">
               <Menu.Item>
-                {({ active }) => (
-                  <div>
-                    <div>
-                      <ArrowLeftOnRectangleIcon width={24} height={24} />
-                    </div>
-                    <div>Setting</div>
-                  </div>
-                )}
+                {({ active }) => <div>Notification goes here.</div>}
               </Menu.Item>
             </div>
           </Menu.Items>

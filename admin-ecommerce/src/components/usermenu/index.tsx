@@ -1,18 +1,11 @@
-import { Menu, Transition } from "@headlessui/react";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { resetLogin } from "@/redux/slices/user-slice";
+
+import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
 
 export default function UserMenu() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const handleLogout = () => {
-    navigate("/login");
-    dispatch(resetLogin());
-  };
+  const { user } = useSelector((state: any) => state.user);
   return (
     <div className="w-fit">
       <Menu as="div" className="relative inline-block text-left">
@@ -26,7 +19,7 @@ export default function UserMenu() {
           </div>
           <Menu.Button>
             <div className="flex gap-x-1 items-center">
-              <p>Namsfdsfsdffdsfe</p>
+              <p>{user?.email || "John"}</p>
               <ChevronDownIcon width={20} height={20} />
             </div>
           </Menu.Button>

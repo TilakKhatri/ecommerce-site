@@ -13,7 +13,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       </div> */}
       {/* <NavBar /> */}
       <div className="flex">
-        <Sidebar className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light" />
+        <Sidebar />
         <div className="flex flex-col w-full">
           <NavBar />
           <div className="w-full py-4 px-4 overflow-x-hidden">{children}</div>

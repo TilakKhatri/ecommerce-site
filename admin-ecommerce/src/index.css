@@ -120,4 +120,52 @@
   .error-msg {
     @apply mt-1 text-supporting-error text-sm;
   }
+
+  .primaryButton {
+    @apply bg-core-indigo dark:bg-core-indigo focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 px-4 py-2 text-white rounded-lg;
+  }
+
+  .secondaryButton {
+    @apply bg-supporting-warning-light hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-800 border-2 border-gray-200 rounded-md shadow-sm;
+  }
+
+  .transparentButton {
+    @apply px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-3 text-white bg-transparent;
+  }
+
+  .redButton {
+    @apply bg-danger px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-2 text-white rounded-lg;
+  }
+
+  .greenButton {
+    @apply bg-success px-9 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 py-2 text-white;
+  }
+
+  .addButton {
+    @apply hover:bg-gray-100 text-core-primary dark:text-core-primary border-core-primary dark:border-core-primary hover:text-white hover:border-white hover:bg-core-primary flex items-center gap-2 px-3 py-2 text-lg border-2 rounded-lg;
+  }
+
+  .tableHead {
+    @apply text-core-primary text-start px-5 py-3;
+  }
+
+  .tableData {
+    @apply text-start px-5 py-3;
+  }
+
+  .tableDataActionContainer {
+    @apply flex justify-start space-x-2;
+  }
+
+  .tableActionContainer {
+    @apply bg-gray-50 hover:bg-gray-300 p-2 rounded-full cursor-pointer;
+  }
+
+  .tableEditIcon {
+    @apply text-core-primary dark:text-core-primary h-5;
+  }
+
+  .tableDeleteIcon {
+    @apply h-5 text-red-500;
+  }
 }

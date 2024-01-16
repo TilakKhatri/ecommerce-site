@@ -50,7 +50,7 @@ export function isUserLogin() {
   return false;
 }
 
-export function resetLogin() {
+export function resetUserLogin() {
   const userData = getUserData();
   if (userData) {
     localStorage.clear();
