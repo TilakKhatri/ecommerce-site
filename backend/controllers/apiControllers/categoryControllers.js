@@ -25,7 +25,8 @@ const getProductsByCategory = async (req, res) => {
 const addCategories = async (req, res) => {
   try {
     const { name, description } = req.body;
-    if (!name && !description) {
+    console.log(name,description)
+    if (!name || !description) {
       return res.status(400).json({
         message: "All fields are required",
       });

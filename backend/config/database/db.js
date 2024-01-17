@@ -4,6 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const setupDB = async () => {
+  // console.log('I called',process.env.LOCAL_MONGO_URI)
   try {
     mongoose
       .connect(process.env.LOCAL_MONGO_URI)

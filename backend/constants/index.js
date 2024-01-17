@@ -4,4 +4,5 @@ const roles = {
   Merchant: "MERCHANT",
 };
 
+
 module.exports = roles;

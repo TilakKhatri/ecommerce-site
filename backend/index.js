@@ -10,8 +10,8 @@ const Routes = require("./routes/index");
 
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 5000;
-
+const port =  process.env.PORT || 4000;
+console.log('hello',process.env.PORT)
 //  middlewares
 // Custom middleware to log requests
 app.use((req, res, next) => {
