@@ -1,14 +1,18 @@
 const {
   getCategories,
   addCategories,
+  getProductsByCategory,
+  editCategory,
 } = require("../../controllers/apiControllers/categoryControllers");
 
+const { checkAuth, checkRole } = require("../../middlewares/auth_role_checker");
 const router = require("express").Router();
 
-router.post("/new", addCategories);
-router.get("/", getCategories);
+router.post("/new", checkAuth, addCategories);
+router.get("/", checkAuth, checkRole("dfdf"), getCategories);
+router.get("/:slug", getProductsByCategory);
 // router.post("/:name", addProduct);
-// router.put("/:id", editProduct);
+router.put("/:id", editCategory);
 // router.delete("/:id", deleteProduct);
 
 module.exports = router;

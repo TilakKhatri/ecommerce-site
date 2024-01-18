@@ -1,18 +1,20 @@
 const slugify = require("slugify");
 
 const categoryModel = require("../../models/categoryModel");
+const productModel = require("../../models/productModel");
 
 const getProductsByCategory = async (req, res) => {
   try {
-    const products = await categoryModel.find({});
-    if (!products) {
+    const category = await categoryModel.findOne({ slug: req.params.slug });
+    if (!category) {
       return res.status(404).json({
-        message: `Cannot find Products.`,
+        message: `Cannot find category.`,
       });
     }
     res.status(200).json({
       success: true,
-      products: [...products],
+      message: "Successfully get",
+      category,
     });
   } catch (error) {
     res.status(400).json({
@@ -25,7 +27,7 @@ const getProductsByCategory = async (req, res) => {
 const addCategories = async (req, res) => {
   try {
     const { name, description } = req.body;
-    console.log(name,description)
+    console.log(name, description);
     if (!name || !description) {
       return res.status(400).json({
         message: "All fields are required",
@@ -36,6 +38,8 @@ const addCategories = async (req, res) => {
     const category = new categoryModel({ ...req.body, slug: slug });
 
     try {
+      // check if any product is available for this category
+
       await category.save();
       res.status(201).json({
         success: true,
@@ -66,7 +70,7 @@ const addCategories = async (req, res) => {
 
 const getCategories = async (req, res) => {
   try {
-    const categories = await categoryModel.find({});
+    const categories = await categoryModel.find({}).select("-products");
 
     if (categories.length === 0) {
       return res.status(404).json({
@@ -89,8 +93,47 @@ const getCategories = async (req, res) => {
   }
 };
 
+const editCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const { name, description } = req.body;
+    if (!name || !description) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+    const category = await categoryModel.findById(categoryId);
+    console.log(category);
+    if (!category) return new Error();
+    const categoryUpdateResult = await categoryModel.updateOne(
+      { _id: categoryId },
+      { $set: updatedCategoryData }
+    );
+    const productUpdateResult = await productModel.updateMany(
+      {
+        category: category.name,
+      },
+      {
+        $set: {
+          category: categoryUpdateResult.name,
+        },
+      }
+    );
+    console.log(categoryUpdateResult, productUpdateResult);
+    return res.status(200).json({
+      success: true,
+      message: "Category updated successfully",
+      productUpdateResult,
+      categoryUpdateResult,
+    });
+  } catch (error) {
+    return { success: false, message: "Internal Server Error" };
+  }
+};
+
 module.exports = {
   getProductsByCategory,
   addCategories,
   getCategories,
+  editCategory,
 };
