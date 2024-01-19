@@ -1,7 +1,24 @@
 import NavBar from "@/components/navbar";
 import Sidebar from "@/components/sidebar";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation();
+
+  const loginStatus = useSelector<RootState>((state) => state.user.loginStatus);
+  console.log("path", pathname);
+  console.log("navigatio", Navigate);
+  if (!loginStatus) {
+    console.log("false login");
+    return <Navigate to="/login" />;
+  }
+
+  if (loginStatus && pathname === "/login") {
+    console.log("false login");
+    return <Navigate to="/admin/dashboard" />;
+  }
   return (
     <>
       {/* <div className="flex gap-[6px] lg:gap-[32px] bg-neutral-50">
@@ -12,6 +29,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         </main>
       </div> */}
       {/* <NavBar /> */}
+
       <div className="flex">
         <Sidebar />
         <div className="flex flex-col w-full">

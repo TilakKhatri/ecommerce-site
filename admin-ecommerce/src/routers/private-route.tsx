@@ -1,9 +1,16 @@
-import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const PrivateLayout = (props: any) => {
-  const { children, ...other } = props;
+import { RootState } from "@/redux/store";
 
-  return <Fragment {...other}>{children}</Fragment>;
-};
+function PrivateRoute({ children }: { children: React.ReactNode }) {
+  const loginStatus = useSelector<RootState>((state) => state.user.loginStatus);
 
-export default PrivateLayout;
+  if (!loginStatus) {
+    return <Navigate to="/login" />;
+  }
+
+  return <>{children}</>;
+}
+
+export default PrivateRoute;

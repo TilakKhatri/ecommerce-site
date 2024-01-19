@@ -3,6 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import useLoginMutation from "@/services/auth/use-login-mutation";
+import { useNavigate } from "react-router-dom";
+
 interface IFormInput {
   email: string;
   password: string;
@@ -35,7 +37,7 @@ function Login() {
 
   const handleLogin: SubmitHandler<IFormInput> = (data) => {
     login(data);
-    reset();
+    // reset();
   };
 
   return (
@@ -68,9 +70,10 @@ function Login() {
             <label htmlFor="password" className="label">
               Password
             </label>
+
             <input
               {...register("password")}
-              type="password"
+              type="show ? 'password' : 'text'"
               className="input"
               id="password"
               placeholder="Enter your password"

@@ -64,7 +64,6 @@ function User() {
               <td className="tableData truncate">
                 {/* {data?.category?.name} */}
               </td>
-
               <td className="tableData">
                 <div className="tableDataActionContainer">
                   <div

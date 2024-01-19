@@ -1,5 +1,5 @@
 import { Fragment, Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AdminRoutes from "./routes/admin-routes";
@@ -7,6 +7,7 @@ import Login from "@/pages/auth/Login";
 import Home from "@/pages/home";
 import PrivateLayout from "./private-route";
 import AppLayout from "@/layout/appLayout";
+import PageNotFound from "@/pages/404";
 
 interface IRoutes {
   id: string;
@@ -26,15 +27,14 @@ const MergeLayoutRoute = ({
   children: React.ReactNode;
   route: IRoutes;
 }) => {
-  const AppLayoutWrapper = route.meta?.appLayout ? AppLayout : Fragment;
-  const PrivateRouteWrapper = route.meta?.privateRoute
+  const PrivateRouteWrapper = route?.meta?.privateRoute
     ? PrivateLayout
     : Fragment;
 
-  return route.meta?.privateRoute ? (
-    <AppLayoutWrapper>{children}</AppLayoutWrapper>
-  ) : (
-    <PrivateRouteWrapper>{children}</PrivateRouteWrapper>
+  return (
+    <PrivateRouteWrapper>
+      <AppLayout>{children}</AppLayout>
+    </PrivateRouteWrapper>
   );
 };
 
@@ -47,11 +47,12 @@ const Router = () => {
         <Route path="/" element={<Home />} />
       </Routes>
       {/* change false to loginStatus after setting up login logic*/}
-      {!loginStatus && !user.isAdmin ? (
+      {!loginStatus && !user.isAdmin && (
         <Routes>
           <Route path="*" element={<Login />} />
         </Routes>
-      ) : (
+      )}
+      {loginStatus && user.isAdmin && (
         <Routes>
           {AdminRoutes.map((route) => {
             return (
@@ -74,6 +75,7 @@ const Router = () => {
               />
             );
           })}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       )}
     </BrowserRouter>

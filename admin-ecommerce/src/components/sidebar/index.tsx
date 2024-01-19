@@ -29,7 +29,8 @@ function Sidebar({ className }: { className?: string }) {
 
   const handleLogout = () => {
     dispatch(resetLogin());
-    navigate("/");
+    navigate("/login");
+    navigate(0);
   };
   // className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light"
   return (

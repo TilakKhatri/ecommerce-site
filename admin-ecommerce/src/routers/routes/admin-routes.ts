@@ -17,11 +17,11 @@ interface IAdminRoutes {
 const AdminRoutes: IAdminRoutes[] = [
   {
     id: "login",
-    path: "/admin/login",
+    path: "/login",
     exact: true,
     component: Login,
     meta: {
-      appLayout: true,
+      appLayout: false,
       privateRoute: false,
     },
   },
