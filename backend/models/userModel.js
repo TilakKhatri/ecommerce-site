@@ -18,6 +18,12 @@ const UserSchema = new Schema(
     fullName: {
       type: String,
     },
+    address: {
+      type: String,
+    },
+    profileImage: {
+      type: String,
+    },
     password: {
       type: String,
       required: [true, "Please enter a valid password"],

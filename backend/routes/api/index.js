@@ -3,7 +3,7 @@ const router = require("express").Router();
 const authRoutes = require("./authRoutes");
 const productRoutes = require("./productRoutes");
 const categoryRoutes = require("./categoryRoutes");
-
+const userRoutes = require("./userRoutes");
 // const userRoutes = require('./user');
 // const addressRoutes = require('./address');
 // const newsletterRoutes = require('./newsletter');
@@ -24,10 +24,14 @@ router.use("/product", productRoutes);
 // category routes
 router.use("/category", categoryRoutes);
 
+/**
+ * @DESC user routes
+ */
+
+router.use("/user", userRoutes);
+
 /*
 // user routes
-router.use('/user', userRoutes);
-
 // address routes
 router.use('/address', addressRoutes);
 
