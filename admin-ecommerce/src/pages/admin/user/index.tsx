@@ -35,7 +35,10 @@ function User() {
             </button>
           </Link> */}
         </div>
-        <table width="100%">
+        <table
+          width="100%"
+          className="min-w-full divide-y divide-gray-200 overflow-x-auto"
+        >
           <thead>
             <tr className="border">
               {tableHeader.map((head) => {
