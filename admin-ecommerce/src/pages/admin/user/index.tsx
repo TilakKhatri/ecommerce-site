@@ -4,22 +4,18 @@ import { Link } from "react-router-dom";
 const tableHeader = [
   {
     id: 1,
-    name: "S.N",
+    name: "Full Name",
   },
   {
     id: 2,
-    name: "Image",
+    name: "Orders",
   },
   {
     id: 3,
-    name: "Name",
+    name: "Payment",
   },
   {
     id: 4,
-    name: "Category",
-  },
-  {
-    id: 5,
     name: "Actions",
   },
 ];
@@ -27,72 +23,98 @@ function User() {
   return (
     <>
       <div className="w-full">
-        <div className="flex justify-between w-full gap-4">
-          <h1 className="mb-4 text-3xl font-bold">Users</h1>
-          {/* <Link to="/course/create">
+        <div className="flex justify-between w-full gap-4 my-8">
+          <h1 className="mb-4 text-lg md:text-xl text-core-secondary font-bold">
+            List of Users
+          </h1>
+          <Link to="/course/create">
             <button type="button" className="primaryButton">
               Create
             </button>
-          </Link> */}
+          </Link>
         </div>
-        <table
-          width="100%"
-          className="min-w-full divide-y divide-gray-200 overflow-x-auto"
-        >
-          <thead>
-            <tr className="border">
-              {tableHeader.map((head) => {
-                return (
-                  <th className="tableHead" key={head.id}>
-                    {head.name}
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
+        <div className="p-4 border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
+          <div className="flex justify-between w-full gap-4 ">
+            <div className="w-1/4">
+              <form>
+                <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+                  Search
+                </label>
+                <input
+                  type="search"
+                  id="search"
+                  className="px-4 py-2 outline-none rounded-lg w-full text-sm text-gray-900 border border-gray-300 "
+                  placeholder="Search"
+                  required
+                />
+              </form>
+            </div>
+          </div>
+          <table width="100%">
+            <thead className="border-none">
+              <tr className="">
+                {tableHeader.map((head) => {
+                  return (
+                    <th className="tableHead" key={head.id}>
+                      {head.name}
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
 
-          <tbody>
-            {/* {tableData && */}
-            {/* tableData.map((data, i) => { */}
-            {/* return ( */}
-            <tr className={`border ${1 % 2 === 0 && "bg-gray-100"}`}>
-              <td className="tableData">{/* {i + 1} */}</td>
+            <tbody className="">
+              {/* {tableData && */}
+              {/* tableData.map((data, i) => { */}
+              {/* return ( */}
+              <tr className={` ${1 % 2 === 0 && "bg-gray-100"}`}>
+                <td className="tableData">
+                  <div className="flex items-center">
+                    <div className="relative inline-block shrink-0 rounded-2xl me-3">
+                      <img
+                        src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/img-49-new.jpg"
+                        className="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
+                        alt=""
+                      />
+                    </div>
+                    <p>Name of User</p>
+                  </div>
+                  {/* {data?.image && (
+                  <img src={data?.image} width={90} height={90} />
+                )} */}
+                </td>
 
-              <td className="tableData">
-                {/* {data?.image && (
-                        <img src={data?.image} width={90} height={90} />
-                      )} */}
-              </td>
-              <td className="tableData truncate">{/* {data?.name} */}</td>
-              <td className="tableData truncate">
-                {/* {data?.category?.name} */}
-              </td>
-              <td className="tableData">
-                <div className="tableDataActionContainer">
-                  <div
-                    // onClick={() =>
-                    //   navigate(`/course/edit/${data?.id}/editCourse`)
-                    // }
-                    className="tableActionContainer"
-                  >
-                    <PencilSquareIcon className="tableEditIcon" />
+                <td className="tableData truncate">
+                  {/* {data?.category?.name} */}
+                </td>
+                <td className="tableData truncate">
+                  {/* {data?.category?.name} */}
+                </td>
+                <td className="tableData">
+                  <div className="tableDataActionContainer">
+                    <div
+                      // onClick={() =>
+                      //   navigate(`/course/edit/${data?.id}/editCourse`)
+                      // }
+                      className="tableActionContainer"
+                    >
+                      <PencilSquareIcon className="tableEditIcon" />
+                    </div>
+                    <div
+                      // onClick={() => {
+                      //   onOpen();
+                      //   setSelectedId(data?.id);
+                      // }}
+                      className="tableActionContainer"
+                    >
+                      <TrashIcon className="tableDeleteIcon " />
+                    </div>
                   </div>
-                  <div
-                    // onClick={() => {
-                    //   onOpen();
-                    //   setSelectedId(data?.id);
-                    // }}
-                    className="tableActionContainer"
-                  >
-                    <TrashIcon className="tableDeleteIcon " />
-                  </div>
-                </div>
-              </td>
-            </tr>
-            {/* ); */}
-            {/* })} */}
-          </tbody>
-        </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

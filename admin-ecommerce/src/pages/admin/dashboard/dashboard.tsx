@@ -1,3 +1,4 @@
+import BarChart from "@/components/ui/BarChart";
 import { useSelector } from "react-redux";
 
 function Dashboard() {
@@ -91,6 +92,9 @@ function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <BarChart />
       </div>
     </>
   );
