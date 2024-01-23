@@ -4,9 +4,8 @@ import {
   // PlusIcon,
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-// import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import cn from "classnames";
 
@@ -19,10 +18,15 @@ import {
 
 import { resetLogin } from "@/redux/slices/user-slice";
 
-function Sidebar({ className }: { className?: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const isToggle = () => setIsOpen(!isOpen);
-
+function Sidebar({
+  className,
+  isOpen,
+  isToggle,
+}: {
+  className?: string;
+  isOpen: Boolean;
+  isToggle: () => void;
+}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -37,9 +41,9 @@ function Sidebar({ className }: { className?: string }) {
     <>
       <aside
         className={cn(
-          { "basis-[2%]": isOpen, "basis-[25%]": !isOpen },
+          { "md:w-20": isOpen, "md:w-72 transition-all": !isOpen },
           className,
-          " flex flex-col justify-between h-screen bg-white transition-all shadow-md"
+          "hidden md:fixed md:w-72 md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white transition-all shadow-md"
         )}
       >
         <div className="px-5">
