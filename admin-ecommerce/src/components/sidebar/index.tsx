@@ -37,13 +37,17 @@ function Sidebar({
     navigate(0);
   };
   // className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light"
+
   return (
     <>
       <aside
         className={cn(
-          { "md:w-20": isOpen, "md:w-72 transition-all": !isOpen },
+          {
+            "md:w-20 transition-all delay-50": isOpen,
+            "md:w-72 transition-all delay-50": !isOpen,
+          },
           className,
-          "hidden md:fixed md:w-72 md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white transition-all shadow-md"
+          "hidden md:fixed  md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white shadow-md"
         )}
       >
         <div className="px-5">

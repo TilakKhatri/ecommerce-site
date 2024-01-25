@@ -1,4 +1,6 @@
+import CreateProductModal from "@/features/admin/product/Modal";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const tableHeader = [
@@ -28,18 +30,24 @@ const tableHeader = [
   },
 ];
 function Product() {
+  const [isUploadProductModalOpen, setIsUploadProductModal] =
+    useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsUploadProductModal((prevState) => !prevState);
+  };
+
   return (
     <>
-      <div className="w-full">
+      <div className="w-full relative">
         <div className="flex justify-between w-full gap-4 my-8">
           <h1 className="mb-4 text-lg md:text-xl text-core-secondary font-bold">
             List of products
           </h1>
-          <Link to="/course/create">
-            <button type="button" className="primaryButton">
-              Create
-            </button>
-          </Link>
+
+          <button onClick={toggleModal} type="button" className="primaryButton">
+            Create
+          </button>
         </div>
         <div className="p-4 border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
           <div className="flex justify-between w-full gap-4 ">
@@ -126,6 +134,13 @@ function Product() {
             </tbody>
           </table>
         </div>
+        {isUploadProductModalOpen && (
+          <CreateProductModal
+            isOpen={isUploadProductModalOpen}
+            toggleModal={toggleModal}
+            clasName="max-w-[65vw]"
+          />
+        )}
       </div>
     </>
   );

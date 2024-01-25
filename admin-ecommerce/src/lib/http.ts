@@ -4,7 +4,7 @@ import axios from "axios";
 // import { getToken, resetLoginData } from "@/utils/utils";
 
 const baseURL: string | undefined = import.meta.env.VITE_BASE_URL;
-
+console.log(getToken());
 const http = axios.create({
   baseURL,
   timeout: 20000,
@@ -13,7 +13,7 @@ const http = axios.create({
 http.interceptors.request.use(
   (config) => {
     if (getToken()) {
-      config.headers["Authorization"] = `Bearer ${getToken()}`;
+      config.headers["Authorization"] = `${getToken()}`;
     }
     return config;
   },

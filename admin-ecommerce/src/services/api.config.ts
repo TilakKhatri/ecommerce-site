@@ -6,3 +6,7 @@ export const AuthConfig = {
   LOGIN: () => "/admin/login",
   REGISTER: () => "/admin/register",
 };
+
+export const CategoryConfig = {
+  GET_CATEGORIES: () => `/v1/category`,
+};
