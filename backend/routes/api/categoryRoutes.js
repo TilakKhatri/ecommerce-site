@@ -9,7 +9,7 @@ const { checkAuth, checkRole } = require("../../middlewares/auth_role_checker");
 const router = require("express").Router();
 
 router.post("/new", checkAuth, addCategories);
-router.get("/", checkAuth, checkRole("dfdf"), getCategories);
+router.get("/", checkAuth, checkRole("ADMIN"), getCategories);
 router.get("/:slug", getProductsByCategory);
 // router.post("/:name", addProduct);
 router.put("/:id", editCategory);

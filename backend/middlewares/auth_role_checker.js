@@ -30,7 +30,7 @@ const checkRole =
     if (!req.user) {
       return res.redirect("/login");
     }
-    // console.log("usr rle", req.user);
+    console.log("usr rle", req.user);
     const userData = await userModel.findById(req.user._id);
     // console.log("userdata", userData);
     if (!roles.includes(userData.role)) return res.end("Unauthorized");
