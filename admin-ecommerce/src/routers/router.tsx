@@ -75,7 +75,6 @@ const Router = () => {
               />
             );
           })}
-          <Route path="*" element={<PageNotFound />} />
         </Routes>
       )}
     </BrowserRouter>

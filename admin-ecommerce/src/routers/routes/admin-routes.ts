@@ -1,7 +1,9 @@
-import Dashboard from "@/pages/admin/dashboard/dashboard";
-import Product from "@/pages/admin/product";
-import User from "@/pages/admin/user";
-import Login from "@/pages/auth/Login";
+import { lazy } from "react";
+
+const Dashboard = lazy(() => import("@/pages/admin/dashboard/dashboard"));
+const Product = lazy(() => import("@/pages/admin/product"));
+const User = lazy(() => import("@/pages/admin/user"));
+const Login = lazy(() => import("@/pages/auth/Login"));
 
 interface IAdminRoutes {
   id: string;

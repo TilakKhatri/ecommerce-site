@@ -24,16 +24,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     return <Navigate to="/admin/dashboard" />;
   }
   return (
-    <>
-      {/* <div className="flex gap-[6px] lg:gap-[32px] bg-neutral-50">
-        <Sidebar className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light" />
-
-        <main className="grow p-12 rounded-lg overflow-auto bg-neutral-50">
-          {children}
-        </main>
-      </div> */}
-      {/* <NavBar /> */}
-
+    <div className={cn("dark:bg-boxdark-2 dark:text-bodydark")}>
       <div className="flex">
         <Sidebar isOpen={isOpen} isToggle={isToggle} />
         <div
@@ -43,12 +34,10 @@ function AppLayout({ children }: { children: React.ReactNode }) {
           })}
         >
           <NavBar />
-          <div className="w-full  overflow-x-none transition translation-all">
-            {children}
-          </div>
+          <div className=" p-4 md:p-6 2xl:p-10">{children}</div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
