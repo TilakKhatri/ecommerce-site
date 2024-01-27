@@ -51,13 +51,21 @@ function Sidebar({
     setDropDown(!dropDown);
   };
   // className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light"
+
   return (
     <>
       <aside
         className={cn(
-          { "md:w-20": isOpen, "md:w-72 transition-all": !isOpen },
+          {
+            "md:w-20 transition-all delay-50": isOpen,
+            "md:w-72 transition-all delay-50": !isOpen,
+          },
           className,
+<<<<<<< HEAD
           "dark:bg-boxdark-2 dark:text-bodydark hidden md:fixed md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white transition-all shadow-graydark shadow-md"
+=======
+          "hidden md:fixed  md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white shadow-md"
+>>>>>>> 53739a12edde4c2889b44897277ac8bdd77fcfd2
         )}
       >
         <div className="px-5">

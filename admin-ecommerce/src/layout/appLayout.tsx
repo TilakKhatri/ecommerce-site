@@ -28,7 +28,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="flex">
         <Sidebar isOpen={isOpen} isToggle={isToggle} />
         <div
-          className={cn("flex flex-col w-full px-2", {
+          className={cn("flex flex-col w-full px-8", {
             "md:ml-72": !isOpen,
             "md:ml-20": isOpen,
           })}
