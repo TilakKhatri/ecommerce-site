@@ -9,11 +9,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import cn from "classnames";
-import { v4 as uuid } from "uuid";
 
 import logo from "@/assets/Icon.svg";
-
-import MenuLink from "./MenuLinks";
 
 import {
   customerCareLink,
@@ -21,11 +18,6 @@ import {
 } from "@/navigation/admin-navigation";
 
 import { resetLogin } from "@/redux/slices/user-slice";
-import { INavigation } from "@/types/route";
-
-type TProps = {
-  menu: INavigation;
-};
 
 function Sidebar({
   className,
@@ -45,11 +37,7 @@ function Sidebar({
     navigate("/login");
     navigate(0);
   };
-  const [dropDown, setDropDown] = useState<boolean>();
 
-  const handleClick = (e: any) => {
-    setDropDown(!dropDown);
-  };
   // className="max-w-[260px] shadow-md w-full flex-none sticky top-0 bg-shade-light"
 
   return (
@@ -61,11 +49,7 @@ function Sidebar({
             "md:w-72 transition-all delay-50": !isOpen,
           },
           className,
-<<<<<<< HEAD
           "dark:bg-boxdark-2 dark:text-bodydark hidden md:fixed md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white transition-all shadow-graydark shadow-md"
-=======
-          "hidden md:fixed  md:inset-y-0 z-10 md:flex md:flex-col md:justify-between h-screen bg-white shadow-md"
->>>>>>> 53739a12edde4c2889b44897277ac8bdd77fcfd2
         )}
       >
         <div className="px-5">
@@ -91,36 +75,38 @@ function Sidebar({
             </div>
           </div>
           <div>
-            {navigationLinks.map((menuGroup, index) => (
-              <ul key={index}>
-                {menuGroup && (
-                  <li onClick={() => setDropDown(!dropDown)} key={menuGroup.id}>
-                    <button className="flex gap-x-4 items-center  py-4 text-gray-500 dark:text-gray-300 hover:text-darkAsscent dark:hover:text-primaryColor active:text-darkAsscent dark:active:text-primaryColor group w-full">
-                      <span className="absolute w-2 h-8   bg-darkAsscent dark:bg-primaryColor rounded-full left-0 scale-y-0 -translate-x-full  group-active:scale-y-100 group-active:translate-x-0 group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out" />
-                      <div
-                        className={cn(
-                          "flex justify-between items-center w-full"
-                        )}
-                      >
-                        <Link to={menuGroup.path} onClick={handleClick}>
-                          <div className="flex gap-2">
-                            {/* <span>{menuGroup.icon}</span> */}
-                            {/* <span className={cn({ hidden: !isOpen },"whitespace-nowrap")}>{menu.name}</span> */}
-                          </div>
-                        </Link>
-                        {menuGroup.hasSubMenus && (
-                          <ChevronDownIcon
-                            className={cn(
-                              { "rotate-180": dropDown },
-                              "w-6 h-6 mr-2"
-                            )}
-                          />
-                        )}
-                      </div>
-                    </button>
-                  </li>
+            {navigationLinks.map((item) => (
+              <Link
+                to={item.path}
+                key={item.id}
+                className={cn(
+                  "mt-3 p-2 body-default-semibold flex gap-2 group text-core-secondary transition-all hover:bg-core-primary-light",
+                  {
+                    "bg-transparent": item.path === pathname,
+                  }
                 )}
-              </ul>
+              >
+                <item.icon
+                  className={cn("shrink-0 group-hover:text-core-indigo", {
+                    "text-core-indigo": item.path === pathname,
+                  })}
+                  height={20}
+                  width={20}
+                />
+                <p
+                  className={cn(
+                    "group-hover:text-core-indigo",
+                    {
+                      "text-core-indigo": item.path === pathname,
+                    },
+                    {
+                      hidden: isOpen,
+                    }
+                  )}
+                >
+                  {item.name}
+                </p>
+              </Link>
             ))}
           </div>
         </div>

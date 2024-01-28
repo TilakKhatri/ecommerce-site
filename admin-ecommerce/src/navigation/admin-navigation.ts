@@ -40,37 +40,37 @@ export const navigationLinks: INavigation[] = [
     path: "/admin/merchant",
     hasSubMenus: true,
     icon: UsersIcon,
-    subMenus: [
-      {
-        id: "add-merchant",
-        name: "Add merchant",
-        path: "/admin/merchant/new",
-      },
-      {
-        id: "list-merchant",
-        name: "List user",
-        path: "/admin/user/list",
-      },
-    ],
+    // subMenus: [
+    //   {
+    //     id: "add-merchant",
+    //     name: "Add merchant",
+    //     path: "/admin/merchant/new",
+    //   },
+    //   {
+    //     id: "list-merchant",
+    //     name: "List user",
+    //     path: "/admin/user/list",
+    //   },
+    // ],
   },
   {
     id: "product",
     name: "Product",
-    path: "/admin/product/list",
+    path: "/admin/product/",
     hasSubMenus: true,
     icon: BuildingStorefrontIcon,
-    subMenus: [
-      {
-        id: "list-product",
-        name: "Add product",
-        path: "/admin/product/list",
-      },
-      {
-        id: "list-product",
-        name: "Add product",
-        path: "/admin/product/list",
-      },
-    ],
+    // subMenus: [
+    //   {
+    //     id: "list-product",
+    //     name: "Add product",
+    //     path: "/admin/product/list",
+    //   },
+    //   {
+    //     id: "list-product",
+    //     name: "Add product",
+    //     path: "/admin/product/list",
+    //   },
+    // ],
   },
   {
     id: "category",

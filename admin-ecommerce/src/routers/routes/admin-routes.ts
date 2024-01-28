@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 const Dashboard = lazy(() => import("@/pages/admin/dashboard/dashboard"));
 const Product = lazy(() => import("@/pages/admin/product"));
-const User = lazy(() => import("@/pages/admin/user"));
+const User = lazy(() => import("@/pages/admin/merchant"));
 const Login = lazy(() => import("@/pages/auth/Login"));
 
 interface IAdminRoutes {
@@ -50,8 +50,8 @@ const AdminRoutes: IAdminRoutes[] = [
   },
 
   {
-    id: "user",
-    path: "/admin/user",
+    id: "merchant",
+    path: "/admin/merchant",
     exact: true,
     component: User,
     meta: {

@@ -49,6 +49,49 @@ function AddProductForm({ className, toggleModal }: Iprops) {
             <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
           )} */}
       </fieldset>
+      <div className="flex gap-2 items-center mt-4">
+        <fieldset className="w-full">
+          <label htmlFor="name" className="label">
+            Image <span className="required">(required)</span>
+          </label>
+
+          <input
+            // {...register("name")}
+            id="images"
+            className="input"
+            type="file"
+          />
+          {/* {errors.name && (
+            <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
+          )} */}
+        </fieldset>
+        {/*   <fieldset>
+          <label htmlFor="name" className="label">
+            Image2 <span className="required">(required)</span>
+          </label>
+
+          <input
+          
+            id="name"
+            className="input"
+            type="file"
+          />
+      
+        </fieldset>
+        <fieldset>
+          <label htmlFor="name" className="label">
+            Image3 <span className="required">(required)</span>
+          </label>
+
+          <input
+       
+            id="name"
+            className="input"
+            type="file"
+          />
+       
+        </fieldset> */}
+      </div>
       <fieldset className="mt-4">
         <label htmlFor="amount" className="label">
           Category
@@ -56,7 +99,7 @@ function AddProductForm({ className, toggleModal }: Iprops) {
 
         <select
           id="category"
-          className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg"
+          className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg input px-1"
         >
           <option className="input" selected>
             Choose a Category
@@ -88,8 +131,8 @@ function AddProductForm({ className, toggleModal }: Iprops) {
           rows={8}
         />
       </fieldset>
-      <div className="flex w-full justify-between">
-        <fieldset className="mt-4">
+      <div className="flex w-full justify-between gap-2 flex-col md:flex-row">
+        <fieldset className="mt-4 w-1/2">
           <label htmlFor="amount" className="label">
             Quantity <span className="required">(required)</span>
           </label>
@@ -102,7 +145,7 @@ function AddProductForm({ className, toggleModal }: Iprops) {
             placeholder="Enter number of products"
           />
         </fieldset>
-        <fieldset className="mt-4">
+        <fieldset className="mt-4 w-1/2">
           <label htmlFor="amount" className="label">
             Price <span className="required">(required)</span>
           </label>
@@ -116,7 +159,7 @@ function AddProductForm({ className, toggleModal }: Iprops) {
           />
         </fieldset>
       </div>
-      <button className="mt-8 primaryButton" disabled={false} type="submit">
+      <button className="mt-8 primary-btn" type="submit">
         Add Product
       </button>
     </form>

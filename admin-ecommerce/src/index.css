@@ -12,21 +12,7 @@
     @apply font-normal text-base text-body bg-whiten relative z-1;
   }
 
-  tr {
-    @apply px-5 text-[14px] font-medium tracking-[0.02em] text-neutral-700;
-  }
 
-  td {
-    @apply px-5 py-4;
-  }
-
-  th {
-    @apply text-neutral-600 px-5 py-4 font-semibold;
-  }
-
-  thead {
-    @apply border-y border-neutral-200;
-  }
 }
 
 .bar::-webkit-scrollbar {
@@ -203,7 +189,7 @@ span.flatpickr-weekday,
   display: none !important;
 }
 
-/* @layer components {
+@layer components {
   .input {
     @apply block w-full px-2 py-3 rounded-md border text-sm font-normal  outline-none border-neutral-200 focus:border-core-primary;
   }
@@ -212,9 +198,6 @@ span.flatpickr-weekday,
     @apply block mb-1 text-sm font-semibold text-neutral-900;
   }
 
-  .primary-btn {
-    @apply px-3 py-3 w-full rounded-full text-shade-light text-base  bg-core-primary;
-  }
 
   .secondary-btn {
     @apply primary-btn bg-neutral-50 text-neutral-800;
@@ -282,9 +265,7 @@ span.flatpickr-weekday,
     @apply mt-1 text-supporting-error text-sm;
   }
 
-  .primaryButton {
-    @apply bg-core-indigo dark:bg-core-indigo focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 px-4 py-2 text-white rounded-lg;
-  }
+
 
   .secondaryButton {
     @apply bg-supporting-warning-light hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 inline-flex justify-center px-4 py-2 text-sm font-medium text-gray-800 border-2 border-gray-200 rounded-md shadow-sm;
@@ -303,7 +284,10 @@ span.flatpickr-weekday,
   }
 
   .addButton {
-    @apply hover:bg-gray-100 text-core-primary dark:text-core-primary border-core-primary dark:border-core-primary hover:text-white hover:border-white hover:bg-core-primary flex items-center gap-2 px-3 py-2 text-lg border-2 rounded-lg;
+    @apply hover:bg-gray-100 text-core-primary dark:text-core-primary border-core-primary dark:border-core-primary hover:text-white hover:border-white  flex items-center gap-2 px-3 py-2 text-lg border-2 rounded-lg;
+  }
+  .primary-btn {
+    @apply hover:bg-core-indigo bg-core-indigo text-white dark:text-core-white hover:text-white outline-none border-none px-2 py-2 rounded-lg;
   }
 
   .tableHead {
@@ -327,6 +311,6 @@ span.flatpickr-weekday,
   }
 
   .tableDeleteIcon {
-    @apply h-5 text-red-500;
+    @apply h-5 text-core-red;
   }
-} */
+} 

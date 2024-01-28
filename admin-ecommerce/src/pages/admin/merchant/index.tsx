@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import Breadcrumb from "@/components/ui/BreadCrumb";
-import ProductTable from "@/features/admin/product/table";
+import MerchantTable from "@/features/admin/merchant/merchant-table";
 import CreateProductModal from "@/features/admin/product/Modal";
 
-function Product() {
+function Merchant() {
   const [isUploadProductModalOpen, setIsUploadProductModal] =
     useState<boolean>(false);
 
@@ -14,9 +14,9 @@ function Product() {
 
   return (
     <>
-      <Breadcrumb pageName={"/Product"} />
+      <Breadcrumb pageName={"Merchant"} />
       <div className="w-full">
-        <ProductTable
+        <MerchantTable
           isOpen={isUploadProductModalOpen}
           toggleModal={toggleModal}
         />
@@ -32,4 +32,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Merchant;

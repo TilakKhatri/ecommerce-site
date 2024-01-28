@@ -20,7 +20,7 @@ const MenuLink = ({ menu }: { menu: INavigation }) => {
           <Link to={menu.path} onClick={handleClick}>
             <div className="flex gap-2">
               <span>{menu.icon}</span>
-              {/* <span className={cn({ hidden: !isOpen },"whitespace-nowrap")}>{menu.name}</span> */}
+              <span className={cn("whitespace-nowrap")}>{menu.name}</span>
             </div>
           </Link>
           {menu.hasSubMenus && (
@@ -28,6 +28,29 @@ const MenuLink = ({ menu }: { menu: INavigation }) => {
               className={cn({ "rotate-180": dropDown }, "w-6 h-6 mr-2")}
             />
           )}
+           {menu.hasSubMenus && (
+        <ul
+          className={cn(
+            { "hide-for-transition": !dropDown },
+            "flex flex-col bg-gray-200 dark:bg-darkBackground pl-4 opacity-100"
+          )}
+        >
+          {menu.subMenus.map((subMenu) => (
+            <li key={uuid()}>
+              <button
+                id={subMenu.id}
+                className="p-2 text-gray-500 dark:text-gray-300 hover:text-darkAsscent dark:hover:text-primaryColor"
+              >
+                <Link to={subMenu.link}>
+                  <div className="flex gap-2">
+                    <span>{subMenu.icon}</span>
+                    <h2 className={cn({ hidden: !isOpen })}>{subMenu.name}</h2>
+                  </div>
+                </Link>
+              </button>
+            </li>
+          ))}
+        </ul>
         </div>
       </button>
     </li>

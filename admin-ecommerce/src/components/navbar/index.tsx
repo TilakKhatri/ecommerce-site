@@ -1,10 +1,7 @@
 import UserMenu from "../usermenu";
 import NotificationMenu from "../notificationmenu";
-<<<<<<< HEAD
 import DarkModeSwitcher from "../ui/DarkModeSwitcher";
-=======
 import { memo } from "react";
->>>>>>> 53739a12edde4c2889b44897277ac8bdd77fcfd2
 
 const NavBar = () => {
   return (

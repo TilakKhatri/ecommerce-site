@@ -14,27 +14,19 @@ const tableHeader = [
   },
   {
     id: 2,
-    name: "Price",
+    name: " Number of products",
   },
   {
     id: 3,
-    name: "Stock",
-  },
-  {
-    id: 4,
-    name: "Category",
-  },
-  {
-    id: 5,
     name: "Status",
   },
   {
-    id: 6,
+    id: 4,
     name: "Action",
   },
 ];
 
-const ProductTable = ({ isOpen, toggleModal }: Iprops) => {
+const MerchantTable = ({ isOpen, toggleModal }: Iprops) => {
   return (
     <div className="rounded-md border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-between items-center py-4 px-4 md:px-6 xl:px-7.5 ">
@@ -79,13 +71,8 @@ const ProductTable = ({ isOpen, toggleModal }: Iprops) => {
                   </p>
                 </div>
               </td>
-              <td className="tableData">$56</td>
-              <td className="tableData">30</td>
-              <td className="tableData">
-                <p className="text-sm text-black dark:text-white">
-                  Electronics
-                </p>
-              </td>
+              <td className="tableData">56</td>
+
               <td className="tableData">Active</td>
               <td className="tableData">
                 <div className="flex gap-2 ">
@@ -113,4 +100,4 @@ const ProductTable = ({ isOpen, toggleModal }: Iprops) => {
   );
 };
 
-export default ProductTable;
+export default MerchantTable;
