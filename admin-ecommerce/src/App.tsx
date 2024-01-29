@@ -11,20 +11,22 @@ function App() {
 
   return (
     <>
+      <div className="z-[9999]">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            error: {
+              duration: 3000,
+            },
+          }}
+        />
+      </div>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <Router />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </Provider>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          error: {
-            duration: 3000,
-          },
-        }}
-      />
     </>
   );
 }

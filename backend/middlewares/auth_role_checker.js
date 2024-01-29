@@ -14,7 +14,7 @@ const checkAuth = (req, res, next) => {
   // Bearer token
   const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    console.log("verifying");
+    // console.log("verifying");
     if (err) return res.sendStatus(403); //invalid token
     req.user = decoded; //for correct token
     next();
@@ -30,7 +30,7 @@ const checkRole =
     if (!req.user) {
       return res.redirect("/login");
     }
-    console.log("usr rle", req.user);
+    // console.log("usr rle", req.user);
     const userData = await userModel.findById(req.user._id);
     // console.log("userdata", userData);
     if (!roles.includes(userData.role)) return res.end("Unauthorized");

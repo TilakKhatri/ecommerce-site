@@ -103,7 +103,7 @@ const editCategory = async (req, res) => {
       });
     }
     const category = await categoryModel.findById(categoryId);
-    console.log(category);
+    // console.log(category);
     if (!category) return new Error();
     const categoryUpdateResult = await categoryModel.updateOne(
       { _id: categoryId },
@@ -119,7 +119,7 @@ const editCategory = async (req, res) => {
         },
       }
     );
-    console.log(categoryUpdateResult, productUpdateResult);
+    // console.log(categoryUpdateResult, productUpdateResult);
     return res.status(200).json({
       success: true,
       message: "Category updated successfully",
@@ -130,7 +130,6 @@ const editCategory = async (req, res) => {
     return { success: false, message: "Internal Server Error" };
   }
 };
-sdsasad
 
 module.exports = {
   getProductsByCategory,
