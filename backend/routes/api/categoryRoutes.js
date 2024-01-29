@@ -1,3 +1,5 @@
+const upload = require("../../helpers/multer");
+
 const {
   getCategories,
   addCategories,
@@ -8,7 +10,7 @@ const {
 const { checkAuth, checkRole } = require("../../middlewares/auth_role_checker");
 const router = require("express").Router();
 
-router.post("/new", checkAuth, addCategories);
+router.post("/new", upload.single("image"), addCategories);
 router.get("/", checkAuth, checkRole("ADMIN"), getCategories);
 router.get("/:slug", getProductsByCategory);
 // router.post("/:name", addProduct);

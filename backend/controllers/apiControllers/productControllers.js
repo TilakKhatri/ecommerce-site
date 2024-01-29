@@ -46,17 +46,13 @@ const getProductBySlug = async (req, res) => {
 
 const searchProduct = async (req, res) => {};
 
-const addProduct = async (req, res) => {
+const addProduct = async (req, res, next) => {
   try {
-    const { name, description, quantity, price, category } = req.body;
+    // const { name, description, quantity, price, category } = req.body;
     console.log("req.body", req.body);
-    if (!name || !description || !quantity || !price || !category) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
 
+    console.log(req.files);
+    console.log(req.files[0]);
     // const slug = slugify(name, { lower: true });
     // console.log("slug", slug);
 
@@ -80,7 +76,7 @@ const addProduct = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Product created successfully",
-      product,
+      // product,
     });
   } catch (error) {
     console.error("Error while creating product:", error);
