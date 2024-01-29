@@ -4,6 +4,7 @@ const Dashboard = lazy(() => import("@/pages/admin/dashboard/dashboard"));
 const Product = lazy(() => import("@/pages/admin/product"));
 const User = lazy(() => import("@/pages/admin/merchant"));
 const Login = lazy(() => import("@/pages/auth/Login"));
+const Category = lazy(() => import("@/pages/admin/category"));
 
 interface IAdminRoutes {
   id: string;
@@ -54,6 +55,16 @@ const AdminRoutes: IAdminRoutes[] = [
     path: "/admin/merchant",
     exact: true,
     component: User,
+    meta: {
+      appLayout: true,
+      privateRoute: true,
+    },
+  },
+  {
+    id: "category",
+    path: "/admin/category",
+    exact: true,
+    component: Category,
     meta: {
       appLayout: true,
       privateRoute: true,

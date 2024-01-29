@@ -24,7 +24,7 @@ function Product() {
           <CreateProductModal
             isOpen={isUploadProductModalOpen}
             toggleModal={toggleModal}
-            clasName="max-w-[70vw]"
+            clasName="max-w-[80vw]"
           />
         )}
       </div>

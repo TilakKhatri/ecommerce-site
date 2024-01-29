@@ -9,6 +9,7 @@ export const AuthConfig = {
 
 export const CategoryConfig = {
   GET_CATEGORIES: () => `/v1/category`,
+  ADD_CATEGORIES: () => `/v1/category/new`,
 };
 
 export const ProductConfig = {

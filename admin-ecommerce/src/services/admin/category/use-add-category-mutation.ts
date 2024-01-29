@@ -4,20 +4,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import http from "@/lib/http";
-import { ProductConfig } from "@/services/api.config";
+import { CategoryConfig } from "@/services/api.config";
 
-interface IUploadProduct {
-  name: string;
-  category: string;
-  description: string;
-  quantity: string;
-  price: string;
-}
-
-const addProductApi = async ({ data }: { data: FormData }) => {
+const addCategoryApi = async ({ data }: { data: FormData }) => {
   try {
     console.log("data", data.get("images"));
-    const url = ProductConfig.ADD_PRODUCT();
+    const url = CategoryConfig.ADD_CATEGORIES();
     const response = await http.post(url, data);
     console.log("reponse", response);
     return response.data;
@@ -29,7 +21,7 @@ const addProductApi = async ({ data }: { data: FormData }) => {
   }
 };
 
-const useAddProductMutation = ({
+const useAddCategoryMutation = ({
   reset,
   toggleModal,
   setImage,
@@ -42,13 +34,13 @@ const useAddProductMutation = ({
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addProductApi,
+    mutationFn: addCategoryApi,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: ["category"] });
       reset();
       setImage(null);
       toggleModal();
-      toast.success(data?.message || "product successfully added");
+      toast.success(data?.message || "Category successfully added");
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (e: any) => {
@@ -57,4 +49,4 @@ const useAddProductMutation = ({
   });
 };
 
-export default useAddProductMutation;
+export default useAddCategoryMutation;
