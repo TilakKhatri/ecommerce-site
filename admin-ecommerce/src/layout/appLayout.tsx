@@ -1,10 +1,12 @@
-import NavBar from "@/components/navbar";
-import Sidebar from "@/components/sidebar";
-import { RootState } from "@/redux/store";
 import cn from "classnames";
-import { useState } from "react";
+import { useState, lazy } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+
+import { RootState } from "@/redux/store";
+
+const NavBar = lazy(() => import("@/components/navbar"));
+const Sidebar = lazy(() => import("@/components/sidebar"));
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +21,11 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     return <Navigate to="/login" />;
   }
 
-  if (loginStatus && pathname === "/login") {
+  if (loginStatus && (pathname === "/login" || pathname === "/admin")) {
     // console.log("false login");
     return <Navigate to="/admin/dashboard" />;
   }
+  console.log("from app layout");
   return (
     <div className={cn("dark:bg-boxdark-2 dark:text-bodydark")}>
       <div className="flex">

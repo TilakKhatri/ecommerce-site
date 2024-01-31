@@ -39,7 +39,7 @@ const MerchantTable = ({ isOpen, toggleModal }: Iprops) => {
         </div>
         <div>
           <button onClick={toggleModal} className="primary-btn bg-core-indigo">
-            Add Product
+            Add Merchant
           </button>
         </div>
       </div>

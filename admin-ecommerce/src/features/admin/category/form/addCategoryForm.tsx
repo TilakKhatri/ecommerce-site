@@ -6,7 +6,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as yup from "yup";
 
-import useGetCategoryQuery from "@/services/admin/category/use-get-category-query";
 import useAddCategoryMutation from "@/services/admin/category/use-add-category-mutation";
 
 type Iprops = {
@@ -21,7 +20,7 @@ interface IUploadCategory {
 
 const schema = yup
   .object({
-    name: yup.string().required("Product name is required."),
+    name: yup.string().required("Category name is required."),
     description: yup.string().required("Description is required."),
   })
   .required();
@@ -36,7 +35,6 @@ function AddCategoryForm({ className, toggleModal }: Iprops) {
     resolver: yupResolver(schema),
   });
 
-  const { data: categoriesList } = useGetCategoryQuery();
   const [image, setImage] = useState<File | null>(null);
   // creating formdata
   const handleSubmitData: SubmitHandler<IUploadCategory> = (data) => {
@@ -52,7 +50,6 @@ function AddCategoryForm({ className, toggleModal }: Iprops) {
     formData.append("description", description);
     formData.append("image", image);
 
-    console.log("formdata", formData);
     addCategory({ data: formData });
     // console.log("images", image);
   };
@@ -85,7 +82,7 @@ function AddCategoryForm({ className, toggleModal }: Iprops) {
           id="name"
           className="input"
           type="text"
-          placeholder="Enter Product name"
+          placeholder="Enter Category name"
         />
         {errors.name && (
           <p className="mt-2 text-sm text-core-red">{errors.name.message}</p>
@@ -93,10 +90,10 @@ function AddCategoryForm({ className, toggleModal }: Iprops) {
       </fieldset>
 
       <fieldset>
-        <label className="label">Product Image</label>
-        {/* <p className="body-default text-[#808080]">
+        <label className="label">Category Image</label>
+        <p className="body-default text-[#808080]">
           You can upload 1 file. Upload the product image.
-        </p> */}
+        </p>
 
         <div
           // onDrop={handleDrop}
@@ -140,7 +137,7 @@ function AddCategoryForm({ className, toggleModal }: Iprops) {
 
       <fieldset className="mt-4">
         <label htmlFor="description" className="label">
-          Description <span className="required">(required)</span>
+          Description
         </label>
 
         <textarea

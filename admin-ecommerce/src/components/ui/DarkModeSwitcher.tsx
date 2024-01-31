@@ -6,7 +6,7 @@ const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();
 
   return (
-    <li className="list-none">
+    <div>
       <label
         className={`relative m-0 block h-7.5 w-14 rounded-full ${
           colorMode === "dark" ? "bg-core-indigo" : "bg-stroke"
@@ -34,7 +34,7 @@ const DarkModeSwitcher = () => {
           </span>
         </span>
       </label>
-    </li>
+    </div>
   );
 };
 

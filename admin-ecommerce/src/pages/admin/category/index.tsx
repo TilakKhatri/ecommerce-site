@@ -16,7 +16,7 @@ function Category() {
 
   return (
     <>
-      <Breadcrumb pageName={"/Category"} />
+      <Breadcrumb pageName={"Category"} />
       <div className="w-full">
         <CategoryTable
           isOpen={isUploadCategoryModalOpen}
