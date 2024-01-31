@@ -1,5 +1,7 @@
 const slugify = require("slugify");
 
+const getCloudinaryConfig = require("../../config/cloudinary/index");
+
 const categoryModel = require("../../models/categoryModel");
 const productModel = require("../../models/productModel");
 
@@ -25,53 +27,52 @@ const getProductsByCategory = async (req, res) => {
 };
 
 const addCategories = async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
   try {
     const { name, description } = req.body;
-    console.log("form-data", req.body);
-    console.log(name, description);
-    if (!name || !description) {
+    if (!name || !description || !req.file) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
+    // check for file
+
+    // const file = dataUri(req).content;
+    const cloudinary = getCloudinaryConfig();
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "image",
+    });
+
+    req.body.image = result.secure_url;
 
     const slug = slugify(name, { lower: true });
     const category = new categoryModel({
       ...req.body,
       slug: slug,
-      image: req.file.path,
     });
 
-    try {
-      // check if any product is available for this category
+    // check if any product is available for this category
 
-      await category.save();
-      res.status(201).json({
-        success: true,
-        message: "Successfully created",
-        products,
-      });
-    } catch (error) {
-      if (error.code === 11000) {
-        // Duplicate key error (probably duplicate name or slug)
-        res.status(400).json({
-          success: false,
-          message: "Category with the same name or slug already exists",
-          error: error.message,
-        });
-      } else {
-        // Other error
-        throw error; // Rethrow the error to be caught by the outer catch block
-      }
-    }
+    await category.save();
+    res.status(201).json({
+      success: true,
+      message: "Successfully created",
+    });
   } catch (error) {
-    res.status(500).json({
-      message: "Error while creating category.",
-      success: false,
-      error,
-    });
+    if (error.code === 11000) {
+      // Duplicate key error (probably duplicate name or slug)
+      res.status(400).json({
+        success: false,
+        message: "Category with the same name or slug already exists",
+        error: error.message,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: "Internal error",
+        error: error.message,
+      });
+    }
   }
 };
 

@@ -1,5 +1,7 @@
 const multer = require("multer");
-
+const DataUri = require("datauri");
+const path = require("path");
+console.log("path", path);
 /**
  * @DESC uploads directory for the storage configuration of the files received by multer
  */
@@ -12,7 +14,11 @@ const fileStorageDirectory = multer.diskStorage({
     cb(null, new Date().toISOString() + "-" + file.originalname);
   },
 });
-
+const storage = multer.diskStorage({
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 const fileFilterFunction = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
@@ -24,7 +30,7 @@ const fileFilterFunction = (req, file, cb) => {
 };
 
 const upload = multer({
-  storage: fileStorageDirectory,
+  storage: storage,
   // limits: { fileSize: 29999 },
   fileFilter: fileFilterFunction,
 });
