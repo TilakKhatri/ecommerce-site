@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const { hashPassword } = require("../../helpers/auth");
-const User = require("../../models/userModel");
+const userModel = require("../../models/userModel");
+const { sendEmailVerification } = require("../../services/nodemailers");
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "You must enter a password." });
     }
 
-    const user = await User.findOne({ email });
+    const user = await userModel.findOne({ email });
     // console.log("user", user);
     if (!user) {
       return res
@@ -36,9 +37,18 @@ const login = async (req, res) => {
         message: "Password Incorrect",
       });
     }
-
+    if (user.verified === false) {
+      await sendEmailVerification({
+        email: user.email,
+        verificationToken: user.verificationToken,
+      });
+      return res.status(403).json({
+        message:
+          "Email is not verified yet. Please check your email for verification ",
+      });
+    }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
+      expiresIn: "90d",
     });
     if (!token) {
       throw new Error();

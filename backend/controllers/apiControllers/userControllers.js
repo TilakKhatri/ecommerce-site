@@ -32,7 +32,7 @@ const getUserList = async (req, res) => {
   }
 };
 
-const getMerchantList = async () => {
+const getMerchantList = async (req, res) => {
   try {
     const user = await userModel.find({ role: "MERCHANT" }).select("-password");
 
@@ -56,22 +56,24 @@ const getMerchantList = async () => {
   }
 };
 
-const createMerchant = async () => {
+const createMerchant = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("new", req.body);
     if (!email || !password) {
       return res.status(400).json({
         message: false,
         message: "Required all fields",
       });
     }
+
     const userExits = await userModel.findOne({ email });
-    // console.log(user);
-    if (userExits) {
+    console.log(userExits);
+    if (userExits !== null) {
       return res.status(400).json({ error: "user already exists." });
     }
     const hash = await hashPassword(password);
-    const newAccount = new User({
+    const newAccount = new userModel({
       ...req.body,
       isAdmin: true,
       password: hash,
@@ -82,10 +84,12 @@ const createMerchant = async () => {
     newAccount.verificationToken = randomString;
     await newAccount.save();
     // send email for verification
+
     await sendEmailVerification({
       email: newAccount.email,
       verificationToken: newAccount.verificationToken,
     });
+
     res.send("Please check your email to verify your account", null, 200);
   } catch (err) {
     return res.status(500).json({
@@ -96,7 +100,7 @@ const createMerchant = async () => {
   }
 };
 
-const getMerchantById = async () => {
+const getMerchantById = async (req, res) => {
   try {
     const merchantId = req.params.id;
     const merchant = await userModel.findById(merchantId);

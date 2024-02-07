@@ -139,9 +139,24 @@ const editCategory = async (req, res) => {
   }
 };
 
+const searchCategory = async (req, res) => {
+  try {
+    console.log("search", req.query.search);
+    const search = req.query.search;
+    const categories = await categoryModel.find({
+      name: { $regex: `${search}`, $options: "i" },
+    });
+    console.log(categories);
+    return res.json(categories);
+  } catch (error) {
+    return { success: false, message: "Internal Server Error" };
+  }
+};
+
 module.exports = {
   getProductsByCategory,
   addCategories,
   getCategories,
   editCategory,
+  searchCategory,
 };

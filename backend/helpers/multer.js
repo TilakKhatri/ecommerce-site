@@ -1,5 +1,5 @@
 const multer = require("multer");
-const DataUri = require("datauri");
+
 const path = require("path");
 console.log("path", path);
 /**
