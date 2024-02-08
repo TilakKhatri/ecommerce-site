@@ -4,22 +4,15 @@ const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-<<<<<<< Updated upstream
 const multer = require("multer");
-=======
 const bodyParser = require("body-parser");
->>>>>>> Stashed changes
 
 const setupDB = require("./config/database/db");
 const Routes = require("./routes/index");
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 4000;
-<<<<<<< Updated upstream
-console.log("hello", process.env.PORT);
-=======
 
->>>>>>> Stashed changes
 //  middlewares
 // Custom middleware to log requests
 app.use((req, res, next) => {
