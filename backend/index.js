@@ -33,15 +33,7 @@ app.use(cors());
 const upload = require("./helpers/multer");
 // database setup
 setupDB();
-app.post("/uploads", upload.array("images"), async (req, res, next) => {
-  // check whether r,nexeq.file contians the file
-  // if not multer is failed to parse so notify the client
-  console.log(req.body);
-  console.log(req.files);
-  console.log(req.file);
-  // successfull completion
-  res.status(201).send("Files uploaded successfully");
-});
+
 // routes
 app.use("", Routes);
 

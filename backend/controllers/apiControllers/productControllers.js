@@ -1,7 +1,7 @@
 const slugify = require("slugify");
-
+const getCloudinaryConfig = require("../../config/cloudinary/index");
 const ProductModel = require("../../models/productModel");
-const { default: mongoose } = require("mongoose");
+
 const categoryModel = require("../../models/categoryModel");
 const productModel = require("../../models/productModel");
 
@@ -13,12 +13,12 @@ const getProducts = async (req, res) => {
         message: `Cannot find Products.`,
       });
     }
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       products: [...products],
     });
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: `Retry again.${error}`,
     });
@@ -28,15 +28,15 @@ const getProducts = async (req, res) => {
 const getProductBySlug = async (req, res) => {
   try {
     const product = await ProductModel.findOne({ slug: req.params.slug });
-    if (!product) return new Error();
-    res.status(200).send({
+    // console.log("query", product);
+    if (product === null) return new Error("Not found");
+    return res.status(200).send({
       success: true,
       message: "Product Found successfully",
       product,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error,
       message: "Error while getting single product",
@@ -44,43 +44,58 @@ const getProductBySlug = async (req, res) => {
   }
 };
 
-const searchProduct = async (req, res) => {};
+const searchProduct = async (req, res) => {
+  try {
+    if (!req.query.search) {
+      return res.json({
+        message: "please enter search query",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: `messages ${error.message}`,
+    });
+  }
+};
 
 const addProduct = async (req, res, next) => {
   try {
-    // const { name, description, quantity, price, category } = req.body;
-    console.log("req.body", req.body);
-
-    console.log(req.files);
-    console.log(req.files[0]);
-    // const slug = slugify(name, { lower: true });
+    const { name, description, quantity, price, category } = req.body;
+    console.log("files", req.files[0].path);
+    const slug = slugify(name, { lower: true });
     // console.log("slug", slug);
+    // const file = dataUri(req).content;
+    const cloudinary = getCloudinaryConfig();
 
-    // const product = new ProductModel({ ...req.body, slug: slug });
-    // await product.save();
-    // console.log(product);
+    const result = await cloudinary.uploader.upload(req.files[0].path, {
+      resource_type: "image",
+    });
+    req.body.image = result.secure_url;
+    const product = new ProductModel({ ...req.body, slug: slug });
+    await product.save();
+    console.log(product);
 
-    // const categoryId = await categoryModel.findOne({ name: category }, "_id");
-    // // console.log(categoryId);
-    // if (!categoryId) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Category not found",
-    //   });
-    // }
+    const categoryId = await categoryModel.findOne({ name: category }, "_id");
+    // console.log(categoryId);
+    if (!categoryId) {
+      return res.status(404).json({
+        success: false,
+        message: "Category not found",
+      });
+    }
 
-    // await categoryModel.findByIdAndUpdate(categoryId, {
-    //   $push: { products: product._id },
-    // });
+    await categoryModel.findByIdAndUpdate(categoryId, {
+      $push: { products: product._id },
+    });
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Product created successfully",
-      // product,
+      product,
     });
   } catch (error) {
-    console.error("Error while creating product:", error);
-    res.status(500).json({
+    // console.error("Error while creating product:", error);
+    return res.status(500).json({
       success: false,
       message: "Error while creating product.",
       error: error.message,
@@ -91,39 +106,22 @@ const addProduct = async (req, res, next) => {
 const editProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    const updatedProductData = req.body;
 
-    const productUpdateResult = await productModel.updateOne(
-      { _id: productId },
-      { $set: updatedProductData }
+    const productUpdateResult = await productModel.findByIdAndUpdate(
+      { productId },
+      req.body,
+      {
+        new: true,
+      }
     );
 
-    if (productUpdateResult.nModified === 0) {
+    if (productUpdateResult === null) {
       // Product not found or no changes made
       return {
         success: false,
         message: "Product not found or no changes made",
       };
     }
-
-    // Step 2: Update the product reference in the CategoryModel
-    const categoryUpdateResult = await categoryModel.updateMany(
-      { "products._id": productId },
-      { $set: { "products.$": updatedProductData } }
-    );
-
-    if (categoryUpdateResult.nModified === 0) {
-      // Product not found in any category or no changes made
-      return {
-        success: false,
-        message: "Product not found in any category or no changes made",
-      };
-    }
-
-    return {
-      success: true,
-      message: "Product and category references updated successfully",
-    };
   } catch (error) {
     console.error("Error updating product and category reference:", error);
     return { success: false, message: "Internal Server Error" };
@@ -134,22 +132,23 @@ const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
     // Step 1: Remove the product from the ProductModel
-    const productDeletionResult = await productModel.deleteOne({
-      _id: productId,
-    });
+    const productDeletionResult = await productModel.findByIdAndDelete(
+      { productId },
+      { new: true }
+    );
 
     if (productDeletionResult.deletedCount === 0) {
       // Product not found
       return { success: false, message: "Product not found" };
     }
 
-    // Step 2: Remove the product reference from the CategoryModel
-    const categoryUpdateResult = await categoryModel.updateMany(
-      { products: productId },
+    // Remove product from category
+    const categoryUpdateResult = await categoryModel.findByIdAndUpdate(
+      categoryId,
       { $pull: { products: productId } }
     );
 
-    if (categoryUpdateResult.nModified === 0) {
+    if (categoryUpdateResult === null) {
       // Product not found in any category
       return { success: false, message: "Product not found in any category" };
     }
