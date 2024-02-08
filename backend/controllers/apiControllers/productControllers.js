@@ -48,7 +48,6 @@ const searchProduct = async (req, res) => {};
 
 const addProduct = async (req, res, next) => {
   try {
-<<<<<<< Updated upstream
     // const { name, description, quantity, price, category } = req.body;
     console.log("req.body", req.body);
 
@@ -70,34 +69,6 @@ const addProduct = async (req, res, next) => {
     //   });
     // }
 
-=======
-    const { name, description, quantity, price, category, images } = req.body;
-    console.log(req.body);
-    if (!name || !description || !quantity || !price || !category) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
-
-    const slug = slugify(name, { lower: true });
-    console.log("slug", slug);
-    const product = req.body;
-
-    // const product = new ProductModel({ ...req.body, slug: slug });
-    // await product.save();
-    // console.log(product);
-
-    // const categoryId = await categoryModel.findOne({ name: category }, "_id");
-    // // console.log(categoryId);
-    // if (!categoryId) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Category not found",
-    //   });
-    // }
-
->>>>>>> Stashed changes
     // await categoryModel.findByIdAndUpdate(categoryId, {
     //   $push: { products: product._id },
     // });
