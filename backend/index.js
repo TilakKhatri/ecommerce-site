@@ -4,7 +4,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-const multer = require("multer");
+
 const bodyParser = require("body-parser");
 
 const setupDB = require("./config/database/db");

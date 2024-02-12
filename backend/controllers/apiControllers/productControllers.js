@@ -44,20 +44,6 @@ const getProductBySlug = async (req, res) => {
   }
 };
 
-const searchProduct = async (req, res) => {
-  try {
-    if (!req.query.search) {
-      return res.json({
-        message: "please enter search query",
-      });
-    }
-  } catch (error) {
-    return res.status(500).json({
-      message: `messages ${error.message}`,
-    });
-  }
-};
-
 const addProduct = async (req, res, next) => {
   try {
     const { name, description, quantity, price, category } = req.body;
@@ -161,6 +147,20 @@ const deleteProduct = async (req, res) => {
       message: "Internal Server Error",
       error: error.message,
     };
+  }
+};
+
+const searchProduct = async (req, res) => {
+  try {
+    if (!req.query.search) {
+      return res.json({
+        message: "please enter search query",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: `messages ${error.message}`,
+    });
   }
 };
 
