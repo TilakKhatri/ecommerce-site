@@ -5,4 +5,5 @@ interface ICategory {
   slug: string;
   isActive?: boolean;
   created?: string;
+  image: string;
 }
