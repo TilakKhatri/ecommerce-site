@@ -6,7 +6,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import { RootState } from "@/redux/store";
 
 const NavBar = lazy(() => import("@/components/navbar"));
-const Sidebar = lazy(() => import("@/components/sidebar"));
+const AdminSidebar = lazy(() => import("@/components/sidebar/admin-sidebar"));
+const MerchantSidebar = lazy(
+  () => import("@/components/sidebar/merchant-sidebar")
+);
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +17,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
 
   const { pathname } = useLocation();
 
-  const loginStatus = useSelector<RootState>((state) => state.user.loginStatus);
+  const { user, loginStatus } = useSelector((state: any) => state.user);
 
   if (!loginStatus) {
     // console.log("false login");
@@ -23,13 +26,21 @@ function AppLayout({ children }: { children: React.ReactNode }) {
 
   if (loginStatus && (pathname === "/login" || pathname === "/admin")) {
     // console.log("false login");
-    return <Navigate to="/admin/dashboard" />;
+    return user.role === "ADMIN" ? (
+      <Navigate to="/admin/dashboard" />
+    ) : (
+      <Navigate to="/merchant/dashboard" />
+    );
   }
   console.log("from app layout");
   return (
     <div className={cn("dark:bg-boxdark-2 dark:text-bodydark")}>
       <div className="flex">
-        <Sidebar isOpen={isOpen} isToggle={isToggle} />
+        {user && user.role === "ADMIN" ? (
+          <AdminSidebar isOpen={isOpen} isToggle={isToggle} />
+        ) : (
+          <MerchantSidebar isOpen={isOpen} isToggle={isToggle} />
+        )}
         <div
           className={cn("flex flex-col w-full px-8", {
             "md:ml-72": !isOpen,

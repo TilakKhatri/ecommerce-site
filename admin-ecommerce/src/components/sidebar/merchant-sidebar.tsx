@@ -12,14 +12,12 @@ import cn from "classnames";
 
 import logo from "@/assets/Icon.svg";
 
-import {
-  customerCareLink,
-  navigationLinks,
-} from "@/navigation/admin-navigation";
+import { MerchantLinks } from "@/navigation/merchant-navigation";
+import { customerCareLink } from "@/navigation/admin-navigation";
 
 import { resetLogin } from "@/redux/slices/user-slice";
 
-function Sidebar({
+function MerchantSidebar({
   className,
   isOpen,
   isToggle,
@@ -75,7 +73,7 @@ function Sidebar({
             </div>
           </div>
           <div>
-            {navigationLinks.map((item) => (
+            {MerchantLinks.map((item) => (
               <Link
                 to={item.path}
                 key={item.id}
@@ -169,67 +167,4 @@ function Sidebar({
   );
 }
 
-export default Sidebar;
-
-{
-  /* 
-{navigationLinks.map((item) => (
-              <>
-                <Link
-                  to={item.path}
-                  key={item.id}
-                  className={cn(
-                    "mt-3 p-2 body-default-semibold flex gap-2 group text-core-secondary transition-all hover:bg-core-primary-light",
-                    {
-                      "bg-transparent": item.path === pathname,
-                    }
-                  )}
-                >
-                  <item.icon
-                    className={cn("shrink-0 group-hover:text-core-indigo", {
-                      "text-core-indigo": item.path === pathname,
-                    })}
-                    height={20}
-                    width={20}
-                  />
-                  <p
-                    className={cn(
-                      "group-hover:text-core-indigo",
-                      {
-                        "text-core-indigo": item.path === pathname,
-                      },
-                      {
-                        hidden: isOpen,
-                      }
-                    )}
-                  >
-                    {item.name}
-                  </p>
-                  {item.subMenus && (
-                    <ChevronDownIcon
-                      onClick={() => setSubMenuOpen(!subMenuOpen)}
-                      className={`${subMenuOpen && "rotate-180"}`}
-                      width={15}
-                      height={15}
-                    />
-                  )}
-                </Link>
-                {item.subMenu && subMenuOpen && (
-                  <ul>
-                    {item.subMenu.map((subMenuItem, idx) => (
-                      <li
-                        key={idx}
-                        className="flex px-5 cursor-pointer text-center text-sm text-gray-200 py-1"
-                      >
-                        {subMenuItem.name}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </>
-            ))}
-            <br />
-
-  
-            </div> */
-}
+export default MerchantSidebar;

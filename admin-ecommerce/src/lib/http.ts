@@ -4,6 +4,7 @@ import axios from "axios";
 // import { getToken, resetLoginData } from "@/utils/utils";
 
 const baseURL: string | undefined = import.meta.env.VITE_BASE_URL;
+// console.log("baseUrl", baseURL);
 console.log(getToken());
 const http = axios.create({
   baseURL,

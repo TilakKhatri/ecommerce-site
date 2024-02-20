@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AdminRoutes from "./routes/admin-routes";
+import MerchantRoutes from "./routes/merchant-routes";
+
 import Login from "@/pages/auth/Login";
 import Home from "@/pages/home";
 import PrivateLayout from "./private-route";
 import AppLayout from "@/layout/appLayout";
-import PageNotFound from "@/pages/404";
+// import PageNotFound from "@/pages/404";
 
 interface IRoutes {
   id: string;
@@ -52,10 +54,9 @@ const Router = () => {
           <Route path="*" element={<Login />} />
         </Routes>
       )}
-      {loginStatus && user.isAdmin && (
-        <Routes>
-          {AdminRoutes.map((route) => {
-            return (
+      <Routes>
+        {loginStatus && user.role === "ADMIN"
+          ? AdminRoutes.map((route) => (
               <Route
                 key={route.id}
                 path={route.path}
@@ -73,10 +74,27 @@ const Router = () => {
                   </Suspense>
                 }
               />
-            );
-          })}
-        </Routes>
-      )}
+            ))
+          : MerchantRoutes.map((route) => (
+              <Route
+                key={route.id}
+                path={route.path}
+                element={
+                  <Suspense
+                    fallback={
+                      <div className="flex w-full h-[100vh] items-center justify-center">
+                        Loading...
+                      </div>
+                    }
+                  >
+                    <MergeLayoutRoute route={route}>
+                      <route.component />
+                    </MergeLayoutRoute>
+                  </Suspense>
+                }
+              />
+            ))}
+      </Routes>
     </BrowserRouter>
   );
 };

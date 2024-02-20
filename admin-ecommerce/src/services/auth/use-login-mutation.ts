@@ -34,17 +34,16 @@ const useLoginMutation = () => {
           isRememberMe: data.isRememberMe,
         })
       );
-      navigate("/admin/dashboard");
-      navigate(0);
-      // if (data.data.admin.roles[0]?.role === "super_admin") {
-      //   navigate("/super-admin");
-      //   navigate(0);
-      //   return;
-      // } else {
-      //   navigate("/admin");
-      //   navigate(0);
-      //   return;
-      // }
+      if (data?.user?.role === "ADMIN") {
+        navigate("/admin/dashboard");
+        navigate(0);
+        return;
+      } else {
+        console.log("data from mutation", data);
+        navigate("/merchant/dashboard");
+        navigate(0);
+        return;
+      }
     },
     onError: (e: any) => {
       console.log("error", e);
