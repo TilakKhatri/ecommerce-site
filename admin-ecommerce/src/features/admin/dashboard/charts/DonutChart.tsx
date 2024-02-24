@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 interface DonotChartState {
@@ -51,9 +51,15 @@ const options: ApexOptions = {
 };
 
 const DonotChart: React.FC = () => {
-  const [state, setState] = useState<DonotChartState>({
-    series: [65, 34, 12, 56],
-  });
+  const [state, setState] = useState<DonotChartState | null>(null);
+  useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      ...{
+        series: [65, 34, 12, 56],
+      },
+    }));
+  }, []);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
@@ -82,11 +88,13 @@ const DonotChart: React.FC = () => {
 
       <div className="mb-2">
         <div id="DonotChart" className="mx-auto flex justify-center">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="donut"
-          />
+          {state && (
+            <ReactApexChart
+              options={options}
+              series={state.series}
+              type="donut"
+            />
+          )}
         </div>
       </div>
 
@@ -95,8 +103,8 @@ const DonotChart: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Desktop </span>
-              <span> 65% </span>
+              <span> Dark Green </span>
+              <span> 25% </span>
             </p>
           </div>
         </div>
@@ -104,8 +112,8 @@ const DonotChart: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Tablet </span>
-              <span> 34% </span>
+              <span> Red/Orange </span>
+              <span> 20% </span>
             </p>
           </div>
         </div>
@@ -113,8 +121,8 @@ const DonotChart: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Mobile </span>
-              <span> 45% </span>
+              <span> Beans and Peas </span>
+              <span> 35% </span>
             </p>
           </div>
         </div>
@@ -122,8 +130,17 @@ const DonotChart: React.FC = () => {
           <div className="flex w-full items-center">
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Unknown </span>
+              <span> Starchy </span>
               <span> 12% </span>
+            </p>
+          </div>
+        </div>
+        <div className="w-full px-8 sm:w-1/2">
+          <div className="flex w-full items-center">
+            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
+            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
+              <span> Others </span>
+              <span> 8% </span>
             </p>
           </div>
         </div>

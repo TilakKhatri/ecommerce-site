@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const options: ApexOptions = {
@@ -71,18 +71,28 @@ interface BarChartState {
 }
 
 const BarChart: React.FC = () => {
-  const [state, setState] = useState<BarChartState>({
-    series: [
-      {
-        name: "Sales",
-        data: [44, 55, 41, 67, 22, 43, 65],
+  const [state, setState] = useState<BarChartState | null>(null);
+  useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      ...{
+        series: [
+          {
+            name: "Sales",
+            data: [44, 55, 41, 67, 22, 43, 65],
+          },
+          {
+            name: "Revenue",
+            data: [13, 23, 20, 8, 13, 27, 15],
+          },
+          {
+            name: "Orders",
+            data: [66, 28, 90, 83, 85, 27, 35],
+          },
+        ],
       },
-      {
-        name: "Revenue",
-        data: [13, 23, 20, 8, 13, 27, 15],
-      },
-    ],
-  });
+    }));
+  }, []);
 
   return (
     <div className="col-span-12 rounded-md border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
@@ -111,12 +121,14 @@ const BarChart: React.FC = () => {
 
       <div>
         <div id="BarChart" className="-ml-5 -mb-9">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="bar"
-            height={350}
-          />
+          {state && (
+            <ReactApexChart
+              options={options}
+              series={state.series}
+              type="bar"
+              height={350}
+            />
+          )}
         </div>
       </div>
     </div>
