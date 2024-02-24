@@ -1,4 +1,4 @@
-import { EyeIcon, ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
+import { ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
 
 const Card = ({
   id,

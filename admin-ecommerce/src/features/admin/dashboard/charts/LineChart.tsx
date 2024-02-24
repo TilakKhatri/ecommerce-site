@@ -1,5 +1,5 @@
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const options: ApexOptions = {
@@ -111,7 +111,7 @@ const options: ApexOptions = {
       },
     },
     min: 0,
-    max: 100,
+    max: 400,
   },
 };
 
@@ -123,20 +123,25 @@ interface LineCharState {
 }
 
 const LineChart: React.FC = () => {
-  const [state, setState] = useState<LineCharState>({
-    series: [
-      {
-        name: "Product One",
-        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
-      },
+  const [state, setState] = useState<LineCharState | null>(null);
+  useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      ...{
+        series: [
+          {
+            name: "Dark Green",
+            data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
+          },
 
-      {
-        name: "Product Two",
-        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
+          {
+            name: "Red Orange",
+            data: [30, 25, 136, 30, 45, 351, 164, 52, 59, 36, 39, 51],
+          },
+        ],
       },
-    ],
-  });
-
+    }));
+  }, []);
   return (
     <div className="col-span-12 rounded-md border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
@@ -178,12 +183,14 @@ const LineChart: React.FC = () => {
 
       <div>
         <div id="chartOne" className="-ml-5">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="area"
-            height={350}
-          />
+          {state && (
+            <ReactApexChart
+              options={options}
+              series={state.series}
+              type="area"
+              height={350}
+            />
+          )}
         </div>
       </div>
     </div>
