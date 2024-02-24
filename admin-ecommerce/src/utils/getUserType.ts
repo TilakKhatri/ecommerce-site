@@ -2,6 +2,6 @@ import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 export const getUserType = () => {
-  // const role = useSelector<RootState>((state) => state.user?.loginStatus);
-  return "ADMIN";
+  const role = useSelector<RootState>((state) => state.user?.loginStatus);
+  return role === "ADMIN" ? "ADMIN" : "MERCHANT";
 };

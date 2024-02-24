@@ -6,14 +6,6 @@ import toast from "react-hot-toast";
 import http from "@/lib/http";
 import { ProductConfig } from "@/services/api.config";
 
-interface IUploadProduct {
-  name: string;
-  category: string;
-  description: string;
-  quantity: string;
-  price: string;
-}
-
 const addProductApi = async ({ data }: { data: FormData }) => {
   try {
     console.log("data", data.get("images"));

@@ -36,12 +36,12 @@ export default function UserMenu() {
           <Menu.Items className="ring-1 ring-black ring-opacity-5 focus:outline-none absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg">
             <div className=" px-1 py-1">
               <Menu.Item>
-                {({ active }) => (
+                {/* {({ active }) => (
                   <div>
                     <div>Name</div>
                     <div>Setting</div>
                   </div>
-                )}
+                )} */}
               </Menu.Item>
             </div>
           </Menu.Items>

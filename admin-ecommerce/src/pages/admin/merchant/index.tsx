@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Breadcrumb from "@/components/ui/BreadCrumb";
 import MerchantTable from "@/features/admin/merchant/merchant-table";
-import CreateProductModal from "@/features/admin/product/Modal";
+import CreateProductModal from "@/features/merchant/product/Modal";
 
 function Merchant() {
   const [isUploadProductModalOpen, setIsUploadProductModal] =

@@ -34,7 +34,7 @@ const tableHeader = [
   },
 ];
 
-const ProductTable = ({ isOpen, toggleModal }: Iprops) => {
+const ProductTable = ({ toggleModal }: Iprops) => {
   return (
     <div className="rounded-md border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-between items-center py-4 px-4 md:px-6 xl:px-7.5 ">

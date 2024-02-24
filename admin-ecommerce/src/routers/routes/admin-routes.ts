@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 const Dashboard = lazy(() => import("@/pages/admin/dashboard/dashboard"));
-const Product = lazy(() => import("@/pages/admin/product"));
+const Product = lazy(() => import("@/pages/merchant/product"));
 const User = lazy(() => import("@/pages/admin/merchant"));
 const Login = lazy(() => import("@/pages/auth/Login"));
 const Category = lazy(() => import("@/pages/admin/category"));

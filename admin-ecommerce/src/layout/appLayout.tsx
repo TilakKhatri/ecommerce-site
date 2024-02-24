@@ -3,8 +3,6 @@ import { useState, lazy } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { RootState } from "@/redux/store";
-
 const NavBar = lazy(() => import("@/components/navbar"));
 const AdminSidebar = lazy(() => import("@/components/sidebar/admin-sidebar"));
 const MerchantSidebar = lazy(
@@ -25,7 +23,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   if (loginStatus && (pathname === "/login" || pathname === "/admin")) {
-    // console.log("false login");
+    console.log("false login");
     return user.role === "ADMIN" ? (
       <Navigate to="/admin/dashboard" />
     ) : (

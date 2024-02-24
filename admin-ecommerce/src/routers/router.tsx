@@ -42,7 +42,7 @@ const MergeLayoutRoute = ({
 
 const Router = () => {
   const { loginStatus, user } = useSelector((state: any) => state.user);
-
+  // console.log("loginStatus", loginStatus, "user", user);
   return (
     <BrowserRouter>
       <Routes>

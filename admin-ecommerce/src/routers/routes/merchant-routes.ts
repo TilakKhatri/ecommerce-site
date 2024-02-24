@@ -1,6 +1,8 @@
 import { lazy } from "react";
 
-const Dashboard = lazy(() => import("@/pages/admin/dashboard/dashboard"));
+const Login = lazy(() => import("@/pages/auth/Login"));
+const Dashboard = lazy(() => import("@/pages/merchant/dashboard/dashboard"));
+const Product = lazy(() => import("@/pages/merchant/product"));
 
 interface IMerchantRoutes {
   id: string;
@@ -14,6 +16,16 @@ interface IMerchantRoutes {
 }
 
 const MerchantRoutes: IMerchantRoutes[] = [
+  {
+    id: "login",
+    path: "/login",
+    exact: true,
+    component: Login,
+    meta: {
+      appLayout: false,
+      privateRoute: false,
+    },
+  },
   {
     id: "dashboard",
     path: "/merchant/dashboard",
@@ -29,7 +41,7 @@ const MerchantRoutes: IMerchantRoutes[] = [
     id: "product",
     path: "/merchant/product",
     exact: true,
-    component: Dashboard,
+    component: Product,
     meta: {
       appLayout: true,
       privateRoute: true,

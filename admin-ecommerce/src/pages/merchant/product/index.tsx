@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import Breadcrumb from "@/components/ui/BreadCrumb";
-import ProductTable from "@/features/admin/product/table";
-import CreateProductModal from "@/features/admin/product/Modal";
+import ProductTable from "@/features/merchant/product/table";
+import CreateProductModal from "@/features/merchant/product/Modal";
 
 function Product() {
   const [isUploadProductModalOpen, setIsUploadProductModal] =

@@ -8,6 +8,7 @@ import BarChart from "@/features/admin/dashboard/charts/BarChart";
 import DonutChart from "@/features/admin/dashboard/charts/DonutChart";
 import LineChart from "@/features/admin/dashboard/charts/LineChart";
 import Card from "@/components/ui/Card";
+import React from "react";
 
 interface Idata {
   id: string;
