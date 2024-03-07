@@ -3,12 +3,6 @@ import { ArrowUpOnSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import RowSkeleton from "@/components/ui/RowSkeleton";
 import { IProduct } from "@/types/product";
 
-type Iprops = {
-  isOpen: boolean;
-  toggleModal: () => void;
-  clasName?: string;
-};
-
 const tableHeader = [
   {
     id: 1,

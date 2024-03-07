@@ -9,7 +9,6 @@ import Login from "@/pages/auth/Login";
 import Home from "@/pages/home";
 import PrivateLayout from "./private-route";
 import AppLayout from "@/layout/appLayout";
-import PageNotFound from "@/pages/404";
 // import PageNotFound from "@/pages/404";
 
 interface IRoutes {
