@@ -1,5 +1,5 @@
 import useGetCategoryQuery from "@/services/admin/category/use-get-category-query";
-import useAddProductMutation from "@/services/admin/product/use-add-product-mutation";
+import useAddProductMutation from "@/services/merchant/product/use-add-product-mutation";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { yupResolver } from "@hookform/resolvers/yup";
 import cn from "classnames";

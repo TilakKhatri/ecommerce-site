@@ -9,6 +9,7 @@ import Login from "@/pages/auth/Login";
 import Home from "@/pages/home";
 import PrivateLayout from "./private-route";
 import AppLayout from "@/layout/appLayout";
+import PageNotFound from "@/pages/404";
 // import PageNotFound from "@/pages/404";
 
 interface IRoutes {
@@ -47,13 +48,13 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        {!loginStatus && !user.isAdmin && (
+          <Route path="/login" element={<Login />} />
+        )}
       </Routes>
       {/* change false to loginStatus after setting up login logic*/}
-      {!loginStatus && !user.isAdmin && (
-        <Routes>
-          <Route path="*" element={<Login />} />
-        </Routes>
-      )}
+
       <Routes>
         {loginStatus && user.role === "ADMIN"
           ? AdminRoutes.map((route) => (

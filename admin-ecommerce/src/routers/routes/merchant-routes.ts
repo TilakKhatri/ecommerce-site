@@ -1,3 +1,4 @@
+import Customer from "@/pages/merchant/customer";
 import { lazy } from "react";
 
 const Login = lazy(() => import("@/pages/auth/Login"));
@@ -22,7 +23,7 @@ const MerchantRoutes: IMerchantRoutes[] = [
     exact: true,
     component: Login,
     meta: {
-      appLayout: false,
+      appLayout: true,
       privateRoute: false,
     },
   },
@@ -52,7 +53,7 @@ const MerchantRoutes: IMerchantRoutes[] = [
     id: "customer",
     path: "/merchant/customer",
     exact: true,
-    component: Dashboard,
+    component: Customer,
     meta: {
       appLayout: true,
       privateRoute: true,

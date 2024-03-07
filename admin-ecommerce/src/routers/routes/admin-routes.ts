@@ -19,16 +19,6 @@ interface IAdminRoutes {
 
 const AdminRoutes: IAdminRoutes[] = [
   {
-    id: "login",
-    path: "/login",
-    exact: true,
-    component: Login,
-    meta: {
-      appLayout: false,
-      privateRoute: false,
-    },
-  },
-  {
     id: "dashboard",
     path: "/admin/dashboard",
     exact: true,

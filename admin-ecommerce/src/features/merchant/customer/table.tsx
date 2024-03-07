@@ -1,7 +1,5 @@
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import image from "/images.jpg";
+import { ArrowUpOnSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 
-import useGetProducts from "@/services/merchant/product/use-get-product-query";
 import RowSkeleton from "@/components/ui/RowSkeleton";
 import { IProduct } from "@/types/product";
 
@@ -18,28 +16,24 @@ const tableHeader = [
   },
   {
     id: 2,
-    name: "Price",
+    name: "Email",
   },
   {
     id: 3,
-    name: "Stock",
+    name: "Spend",
   },
   {
     id: 4,
-    name: "Category",
-  },
-  {
-    id: 5,
     name: "Status",
   },
   {
-    id: 6,
-    name: "Action",
+    id: 5,
+    name: " Action",
   },
 ];
 
-const ProductTable = ({ toggleModal }: Iprops) => {
-  const { data: productList, isLoading } = useGetProducts();
+const CustomerTable = () => {
+  const productList: any = [];
   console.log("products", productList);
   return (
     <div className="rounded-md border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -52,9 +46,7 @@ const ProductTable = ({ toggleModal }: Iprops) => {
           />
         </div>
         <div>
-          <button onClick={toggleModal} className="primary-btn bg-core-indigo">
-            Add Product
-          </button>
+          <ArrowUpOnSquareIcon height={24} width={24} />
         </div>
       </div>
 
@@ -74,7 +66,7 @@ const ProductTable = ({ toggleModal }: Iprops) => {
             </tr>
           </thead>
           <tbody className="tHead">
-            {!isLoading && productList && productList.length > 0 ? (
+            {productList && productList.length > 0 ? (
               <>
                 {productList.map((product: IProduct) => (
                   <tr
@@ -108,21 +100,12 @@ const ProductTable = ({ toggleModal }: Iprops) => {
                       </p>
                     </td>
                     <td className="tableData">
-                      <div className="flex gap-2 ">
-                        <div className="tableActionContainer">
-                          <PencilIcon
-                            className="tableEditIcons"
-                            width={20}
-                            height={20}
-                          />
-                        </div>
-                        <div className="tableActionContainer">
-                          <TrashIcon
-                            className="tableDeleteIcon"
-                            width={20}
-                            height={20}
-                          />
-                        </div>
+                      <div className="tableActionContainer">
+                        <TrashIcon
+                          className="tableDeleteIcon"
+                          width={20}
+                          height={20}
+                        />
                       </div>
                     </td>
                   </tr>
@@ -138,4 +121,4 @@ const ProductTable = ({ toggleModal }: Iprops) => {
   );
 };
 
-export default ProductTable;
+export default CustomerTable;
