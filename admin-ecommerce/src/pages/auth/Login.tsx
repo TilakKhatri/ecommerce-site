@@ -100,8 +100,7 @@ function Login() {
             type="submit"
             className="primary-btn bg-core-indigo mt-8"
           >
-            Login
-          </button>
+            Login {isPending && '...'}         </button>
         </form>
       </div>
     </section>
