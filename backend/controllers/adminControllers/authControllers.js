@@ -61,7 +61,7 @@ const login = async (req, res) => {
     res.cookie("cookie", token);
     res.status(200).json({
       success: true,
-      message: "Your account is created.",
+      message: "Successfully login.",
       token: `Bearer ${token}`,
       user: {
         fullname: user.fullName,
